@@ -5,29 +5,31 @@
     <title>BHOOMIFY | Build a Greener Future</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body style="height: 100vh; display: flex; align-items: center; overflow: hidden;">
-    <div style="display: flex; width: 100%; height: 100%;">
-        <div style="flex: 1.2; background: url('a.jpg') center/cover; position: relative; display: flex; align-items: center; padding: 5%;">
-            <div style="position: absolute; inset: 0; background: rgba(6, 78, 59, 0.7);"></div>
-            <div style="position: relative; color: white; max-width: 500px;">
-                <h1 style="font-size: 4rem; line-height: 1.1; margin-bottom: 1rem;">Build a<br>Greener Future.</h1>
-                <p style="font-size: 1.2rem; opacity: 0.9;">Track impact, earn green credits, and trade them for exclusive rewards.</p>
-            </div>
+<body style="display: flex; flex-direction: column; min-height: 100vh;">
+    <div style="display: flex; flex: 1;">
+        <div style="flex: 1.2; background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('a.jpg') center/cover; color: white; padding: 60px; display: flex; flex-direction: column; justify-content: center;">
+            <img src="logo.png" style="width: 120px; margin-bottom: 30px;" class="animate">
+            <h1 style="font-size: 3.5rem; margin: 0;" class="animate">Bhoomify.</h1>
+            <p style="font-size: 1.2rem; max-width: 500px; line-height: 1.6; opacity: 0.9;" class="animate">
+                We bridge the gap between sustainability and rewards. By gamifying eco-friendly actions, we help campuses reduce their carbon footprint while students earn "Green Credits" for a better planet.
+            </p>
         </div>
-        <div style="flex: 1; display: flex; align-items: center; justify-content: center; background: white;">
-            <div style="width: 100%; max-width: 350px; padding: 2rem;">
-                <img src="logo.png" style="height: 50px; margin-bottom: 2rem;">
-                <h2>Welcome Back</h2>
-                <div style="margin-top: 2rem;">
-                    <label>Username</label>
-                    <input type="text" id="username" placeholder="Enter your name" style="width:100%; padding:12px; margin: 8px 0 20px; border-radius:8px; border:1px solid #ddd;">
-                    <label>Password</label>
-                    <input type="password" id="password" placeholder="••••••••" style="width:100%; padding:12px; margin: 8px 0 20px; border-radius:8px; border:1px solid #ddd;">
-                    <button class="btn-primary" style="width: 100%;" onclick="login()">Sign In</button>
+
+        <div style="flex: 1; background: white; display: flex; align-items: center; justify-content: center;">
+            <div class="card animate" style="width: 100%; max-width: 400px; border: none; box-shadow: none;">
+                <h2 style="font-size: 2rem;">Welcome Back</h2>
+                <div class="input-group">
+                    <input type="text" id="username" placeholder="Username">
                 </div>
+                <div class="input-group">
+                    <input type="password" id="password" placeholder="Password">
+                    <span class="pass-toggle" onclick="togglePass()">SHOW</span>
+                </div>
+                <button class="btn-main" onclick="login()" style="background: var(--primary); color:white; width:100%; padding:15px; border-radius:12px; border:none; font-weight:bold; cursor:pointer;">SIGN IN</button>
             </div>
         </div>
     </div>
+
     <script src="app.js"></script>
 </body>
 </html>
