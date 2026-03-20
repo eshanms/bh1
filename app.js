@@ -1,101 +1,87 @@
-// ===== USERS =====
-let users = [
+// 1. DATA INITIALIZATION
+let users = JSON.parse(localStorage.getItem("users")) || [
   { name: "Eshan", password: "123", role: "student", points: 120, history: [] },
   { name: "Aneya", password: "123", role: "student", points: 90, history: [] },
+  { name: "Faculty1", password: "admin", role: "faculty" }
+];
 
-// ===== LOGIN FUNCTION (HERE) =====
+// 2. SAVE/LOAD
+function saveUsers() {
+  localStorage.setItem("users", JSON.stringify(users));
+}
+
+function loadUsers() {
+  const data = localStorage.getItem("users");
+  if (data) users = JSON.parse(data);
+}
+
+// 3. LOGIN SYSTEM
 function login() {
-  alert("Login clicked");
-
-  let name = document.getElementById("username").value;
-  let pass = document.getElementById("password").value;
-
-  if (name === "Eshan" && pass === "123") {
-    window.location.href = "student.html";
-  } 
-  else if (name === "Faculty1" && pass === "admin") {
-    window.location.href = "faculty.html";
-  } 
-  else {
-    alert("Invalid login!");
-  }
-}
-// ===== STUDENT DASHBOARD =====
-function initStudent() {
   loadUsers();
+  const nameInput = document.getElementById("username").value;
+  const passInput = document.getElementById("password").value;
 
-  let name = localStorage.getItem("user");
-  document.getElementById("userName").innerText = name;
-
-  let user = users.find(u => u.name === name);
-  document.getElementById("points").innerText = user.points;
-
-  // Leaderboard
-  let list = document.getElementById("leaderboard");
-  users.filter(u => u.role === "student")
-       .sort((a,b) => b.points - a.points)
-       .forEach(u => {
-         let li = document.createElement("li");
-         li.innerText = u.name + " - " + u.points;
-         list.appendChild(li);
-       });
-
-  // Rewards
-  let rewards = [
-    { name: "Eco Badge", cost: 50 },
-    { name: "Sapling 🌱", cost: 100 }
-  ];
-
-  let div = document.getElementById("rewards");
-
-  rewards.forEach(r => {
-    let btn = document.createElement("button");
-    btn.innerText = r.name + " (" + r.cost + ")";
-    btn.onclick = () => redeem(r);
-    div.appendChild(btn);
-  });
-
-  // History
-  let hist = document.getElementById("history");
-  user.history.forEach(h => {
-    let li = document.createElement("li");
-    li.innerText = h;
-    hist.appendChild(li);
-  });
-}
-
-// ===== REDEEM =====
-function redeem(reward) {
-  let name = localStorage.getItem("user");
-  let user = users.find(u => u.name === name);
-
-  if (user.points >= reward.cost) {
-    user.points -= reward.cost;
-    user.history.push("Redeemed: " + reward.name);
-
-    saveUsers();
-    location.reload();
-  } else {
-    alert("Not enough points!");
-  }
-}
-
-// ===== FACULTY =====
-function assignPoints() {
-  loadUsers();
-
-  let name = document.getElementById("studentName").value;
-  let pts = parseInt(document.getElementById("pointsInput").value);
-
-  let user = users.find(u => u.name === name && u.role === "student");
+  const user = users.find(u => u.name === nameInput && u.password === passInput);
 
   if (user) {
-    user.points += pts;
-    user.history.push("Earned " + pts + " points");
-
-    saveUsers();
-    alert("Points assigned!");
+    localStorage.setItem("user", user.name);
+    localStorage.setItem("role", user.role);
+    window.location.href = (user.role === "student") ? "student.html" : "faculty.html";
   } else {
-    alert("Student not found");
+    alert("Invalid Username or Password!");
   }
 }
+
+// 4. LOGOUT
+function logout() {
+  localStorage.clear();
+  window.location.href = "login.html";
+}
+
+// 5. STUDENT DASHBOARD
+function initStudent() {
+  loadUsers();
+  const name = localStorage.getItem("user");
+  const user = users.find(u => u.name === name);
+
+  if (!user) return;
+
+  document.getElementById("userName").innerText = user.name;
+  document.getElementById("points").innerText = user.points;
+
+  const list = document.getElementById("leaderboard");
+  if (list) {
+    list.innerHTML = "";
+    users.filter(u => u.role === "student")
+         .sort((a,b) => b.points - a.points)
+         .forEach(u => {
+           let li = document.createElement("li");
+           li.innerText = u.name + " - " + u.points;
+           list.appendChild(li);
+         });
+  }
+}
+
+// 6. FACULTY SYSTEM
+function assignPoints() {
+  loadUsers();
+  const targetName = document.getElementById("studentName").value;
+  const pts = parseInt(document.getElementById("pointsInput").value);
+
+  const student = users.find(u => u.name === targetName && u.role === "student");
+
+  if (student && !isNaN(pts)) {
+    student.points += pts;
+    student.history.push("Earned " + pts + " points");
+    saveUsers();
+    alert("Points assigned!");
+    location.reload();
+  } else {
+    alert("Check student name or points value!");
+  }
+}
+
+  
+
+
+  
