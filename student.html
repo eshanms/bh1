@@ -3,49 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BHOOMIFY | Dashboard</title>
+    <title>BHOOMIFY | Student Dashboard</title>
     <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body onload="initStudent()">
 
 <div class="app-container">
     <nav class="navbar">
         <div class="logo">🌱 BHOOMIFY</div>
-        <div class="card">
-    <h3>📄 Project Documentation</h3>
-    <p style="font-size: 0.8rem; color: #666;">View the full BHOOMIFY research and project report.</p>
-    <a href="BHOOMIFY.pdf" target="_blank" class="download-btn">View Project Report (PDF)</a>
-</div>
         <button class="logout-btn" onclick="logout()">Logout</button>
     </nav>
 
     <div class="user-welcome">
         <h1>Welcome, <span id="userName">User</span>!</h1>
+        <p>Rank: <strong id="userLevel">Seed 🌰</strong></p>
         <div class="points-badge">
             <span id="points">0</span> <small>Points</small>
         </div>
     </div>
 
     <div class="card">
-        <h3>📊 Community Leaderboard</h3>
-        <canvas id="leaderboardChart" width="400" height="200"></canvas>
+        <h3>🏆 Eco-Leaderboard</h3>
+        <div id="leaderboardSection">
+            </div>
     </div>
 
     <div class="card">
-    <h3>🏆 Eco-Leaderboard</h3>
-    <div id="leaderboardSection">
-        </div>
-</div>
+        <h3>🎁 Claim Rewards</h3>
+        <div id="rewardsSection" class="rewards-grid"></div>
+    </div>
 
     <div class="card">
-        <h3>📜 Your Activity History</h3>
-        <ul class="history-list" id="history">
-            </ul>
+        <h3>📜 Activity History</h3>
+        <div id="history"></div>
+    </div>
+
+    <div class="card" style="text-align: center;">
+        <h3>📄 Project Report</h3>
+        <a href="BHOOMIFY.pdf" target="_blank" class="download-btn">View Documentation (PDF)</a>
     </div>
 </div>
 
 <script src="app.js"></script>
 </body>
 </html>
-  
