@@ -3,47 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BHOOMIFY | Student Dashboard</title>
+    <title>BHOOMIFY | Faculty</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body onload="initStudent()">
-
-<div class="app-container">
-    <nav class="navbar">
-        <div class="logo">🌱 BHOOMIFY</div>
-        <button class="logout-btn" onclick="logout()">Logout</button>
-    </nav>
-
-    <div class="user-welcome">
-        <h1>Hi, <span id="userName">Student</span>!</h1>
-        <p>Status: <strong id="userLevel">Seed 🌰</strong></p>
-        <div class="points-badge">
-            <span id="points">0</span>
+<body onload="initFaculty()">
+    <div class="app-container">
+        <div class="navbar">
+            <div class="logo">👨‍🏫 Faculty Admin</div>
+            <button class="btn-main" onclick="logout()" style="width: auto; padding: 10px 20px; background: #f1f5f9; color: var(--dark);">Logout</button>
         </div>
-        <small style="color:#888; font-weight:bold; letter-spacing:1px; text-transform:uppercase;">Green Credits</small>
-    </div>
 
-    <div class="card">
-        <h3>🏆 Eco Leaderboard</h3>
-        <div id="leaderboardSection"></div>
-    </div>
+        <div class="grid-layout">
+            <div class="actions-side">
+                <details class="admin-card" open>
+                    <summary>🎯 Assign Green Credits</summary>
+                    <div class="content">
+                        <select id="studentSelect"></select>
+                        <input type="text" id="manualName" placeholder="Or type student name manually" style="margin-top: 10px;">
+                        <input type="number" id="pointsInput" placeholder="Amount of points (e.g. 50)">
+                        <button class="btn-main" onclick="assignPoints()">Update Credits</button>
+                    </div>
+                </details>
 
-    <div class="card">
-        <h3>🎁 Rewards Catalog</h3>
-        <div id="rewardsSection" class="rewards-grid"></div>
-    </div>
+                <details class="admin-card">
+                    <summary>👥 Manage Student Database</summary>
+                    <div class="content">
+                        <input type="text" id="newStudentName" placeholder="Full Name">
+                        <input type="password" id="newStudentPass" placeholder="Password">
+                        <button class="btn-main" onclick="addStudent()">Add Student</button>
+                        <div id="studentListAdmin" style="margin-top: 20px;"></div>
+                    </div>
+                </details>
+            </div>
 
-    <div class="card">
-        <h3>📜 My Impact History</h3>
-        <div id="history"></div>
+            <div class="display-side">
+                <div class="card">
+                    <h3>🏆 Live Leaderboard</h3>
+                    <div id="leaderboardSection"></div>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <div class="card" style="text-align: center; border: 2px dashed #ddd;">
-        <h3>📄 Documentation</h3>
-        <a href="BHOOMIFY.pdf" target="_blank" class="download-btn" style="background:var(--text); text-decoration:none; display:inline-block; padding:10px 20px; color:white; border-radius:8px; margin-top:10px;">View Project Report</a>
-    </div>
-</div>
-
-<script src="app.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>
