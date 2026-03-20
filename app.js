@@ -6,52 +6,67 @@ let users = JSON.parse(localStorage.getItem("users")) || [
 ];
 
 function saveUsers() { localStorage.setItem("users", JSON.stringify(users)); }
+
+// Ensure data is loaded from the start
+let users = JSON.parse(localStorage.getItem("users")) || [
+  { name: "Eshan", password: "123", role: "student", points: 120, history: [] },
+  { name: "Aneya", password: "123", role: "student", points: 180, history: [] }
+];
+
 function initStudent() {
-  // Ensure the page is fully loaded before drawing the chart
-  window.addEventListener('load', function() {
-    loadUsers();
-    const name = localStorage.getItem("user");
-    const user = users.find(u => u.name === name);
-
-    if (!user) {
-      window.location.href = "login.html";
-      return;
+    // 1. Get Logged in User
+    const currentUser = localStorage.getItem("user");
+    if (!currentUser) {
+        window.location.href = "login.html";
+        return;
     }
 
-    document.getElementById("userName").innerText = user.name;
-    document.getElementById("points").innerText = user.points;
-
-    renderLeaderboard(); // Now it will find the canvas!
-    renderRewards(user);
-    renderHistory(user);
-  });
+    // 2. Find User Data
+    const user = users.find(u => u.name === currentUser);
+    
+    // 3. Update UI (Fixed Name & Points)
+    if (user) {
+        document.getElementById("userName").innerText = user.name;
+        document.getElementById("points").innerText = user.points;
+        renderInnovativeLeaderboard();
+        renderHistory(user);
+    }
 }
-// --- FIXED GRAPH FUNCTION ---
-function renderLeaderboard() {
-    const canvas = document.getElementById('leaderboardChart');
-    if (!canvas) return;
 
-    const students = users.filter(u => u.role === "student");
-    const names = students.map(s => s.name);
-    const points = students.map(s => s.points);
+// INNOVATIVE LEADERBOARD: Podium + Growth Bars
+function renderInnovativeLeaderboard() {
+    const list = document.getElementById("leaderboardSection");
+    if (!list) return;
 
-    // Wait for Chart.js to be ready
-    if (typeof Chart !== 'undefined') {
-        new Chart(canvas, {
-            type: 'bar',
-            data: {
-                labels: names,
-                datasets: [{
-                    label: 'Points Scored',
-                    data: points,
-                    backgroundColor: '#2ecc71'
-                }]
-            },
-            options: { responsive: true, scales: { y: { beginAtZero: true } } }
-        });
-    } else {
-        setTimeout(renderLeaderboard, 500); // Retry if library not loaded
-    }
+    // Sort students by points
+    const students = users.filter(u => u.role === "student")
+                          .sort((a, b) => b.points - a.points);
+
+    let html = '<div class="podium-container">';
+    
+    students.forEach((s, index) => {
+        const rank = index + 1;
+        const medal = rank === 1 ? "🥇" : rank === 2 ? "🥈" : rank === 3 ? "🥉" : "🌱";
+        const barWidth = Math.min((s.points / students[0].points) * 100, 100);
+
+        html += `
+            <div class="leader-row">
+                <div class="rank-badge">${medal}</div>
+                <div class="user-info">
+                    <div class="name-row">
+                        <span>${s.name}</span>
+                        <span class="pts-label">${s.points} Pts</span>
+                    </div>
+                    <div class="progress-bg">
+                        <div class="progress-fill" style="width: ${barWidth}%"></div>
+                    </div>
+                </div>
+            </div>
+        `;
+    });
+
+    html += '</div>';
+    list.innerHTML = html;
 }
 
 // --- REWARDS & CLAIMING ---
