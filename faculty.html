@@ -23,7 +23,13 @@
         <input type="number" id="pointsInput" placeholder="Points amount">
         <button onclick="assignPoints()">Update Credits</button>
     </div>
-
+<div class="card admin-card">
+    <h3>🌱 Register New Student</h3>
+    <p style="color: var(--text-muted); font-size: 0.85rem;">Create a new eco-account for campus members.</p>
+    <input type="text" id="regName" placeholder="Full Name">
+    <input type="password" id="regPass" placeholder="Set Password">
+    <button class="btn-main" onclick="addStudent()">Add Student to System</button>
+</div>
     <div class="card admin-card">
         <h3>🎁 Manage Rewards Catalog</h3>
         <div style="display:flex; gap:10px;">
