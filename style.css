@@ -1,4 +1,64 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap');
+/* --- 1. THE LOGO BRANDING --- */
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.nav-logo {
+    height: 50px; /* Increased size for prominence */
+    width: auto;
+    object-fit: contain;
+}
+
+/* --- 2. THE DELETE BUTTON (DANGER ZONE) --- */
+.btn-delete {
+    background: #fee2e2 !important; /* Soft Red from your refs */
+    color: #ef4444 !important;
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.btn-delete:hover {
+    background: #ef4444 !important;
+    color: white !important;
+    transform: scale(0.98);
+}
+
+/* --- 3. THE COLLAPSIBLE LOGS (Details) --- */
+.log-details {
+    margin-bottom: 12px;
+    background: #fdfdfd;
+    border: 1px solid #f1f5f9;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.log-details summary {
+    padding: 18px 25px;
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--text-heading);
+    cursor: pointer;
+    list-style: none; /* Hides default triangle */
+    display: flex;
+    justify-content: space-between;
+    transition: background 0.3s;
+}
+
+.log-details summary:hover { background: #fafafa; }
+.log-details summary span { font-size: 0.8rem; color: #ccc; }
+
+.log-details[open] summary { border-bottom: 1px solid #e2e8f0; background: #fafafa; }
+.log-details[open] summary span { transform: rotate(180deg); color: var(--brand-green); }
+
+.details-content { padding: 20px; background: #fff; }
 ### 2. Updated `style.css` (Fixing Logo Visibility)
 The logo might be "invisible" if it's white-on-white or too small. This CSS ensures it scales correctly and styles that dark logout button.
 /* --- FULL PAGE WRAPPER --- */
