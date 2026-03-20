@@ -229,3 +229,49 @@ function showLog(type) {
         });
     }
 }
+
+
+function updatePoints() {
+    const name = document.getElementById("studentSelect").value;
+    const pts = parseInt(document.getElementById("pointsUpdate").value);
+    
+    let userIndex = users.findIndex(u => u.name === name);
+    if (userIndex !== -1) {
+        users[userIndex].points += pts;
+        users[userIndex].history.push({
+            date: new Date().toLocaleDateString(),
+            event: "Faculty Update",
+            amount: pts
+        });
+        saveData();
+        renderLeaderboard();
+        alert("Credits Updated!");
+    }
+}
+
+function renderLeaderboard() {
+    const container = document.getElementById("leaderboardDisplay");
+    const students = users.filter(u => u.role === "student").sort((a,b) => b.points - a.points);
+    const max = Math.max(...students.map(s => s.points), 1);
+
+    container.innerHTML = students.map(s => `
+        <div class="leader-row">
+            <div class="leader-info"><span>${s.name}</span><span>${s.points} XP</span></div>
+            <div class="bar-outer"><div class="bar-inner" style="width: ${(s.points/max)*100}%"></div></div>
+        </div>
+    `).join('');
+}
+
+function togglePass() {
+    const p = document.getElementById("password");
+    const t = document.querySelector(".pass-toggle");
+    if(p.type === "password") {
+        p.type = "text"; t.innerText = "HIDE";
+    } else {
+        p.type = "password"; t.innerText = "SHOW";
+    }
+}
+
+function saveData() {
+    localStorage.setItem("users", JSON.stringify(users));
+}
