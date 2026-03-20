@@ -2,6 +2,24 @@
 let users = [
   { name: "Eshan", password: "123", role: "student", points: 120, history: [] },
   { name: "Aneya", password: "123", role: "student", points: 90, history: [] },
+
+// ===== LOGIN FUNCTION (HERE) =====
+function login() {
+  alert("Login clicked");
+
+  let name = document.getElementById("username").value;
+  let pass = document.getElementById("password").value;
+
+  if (name === "Eshan" && pass === "123") {
+    window.location.href = "student.html";
+  } 
+  else if (name === "Faculty1" && pass === "admin") {
+    window.location.href = "faculty.html";
+  } 
+  else {
+    alert("Invalid login!");
+  }
+}
 // ===== STUDENT DASHBOARD =====
 function initStudent() {
   loadUsers();
