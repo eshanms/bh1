@@ -1,4 +1,56 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap');
+### 2. Updated `style.css` (Fixing Logo Visibility)
+The logo might be "invisible" if it's white-on-white or too small. This CSS ensures it scales correctly and styles that dark logout button.
+
+```css
+/* --- SINGLE UNIFIED NAVBAR --- */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 5%;
+    background: var(--white);
+    border-bottom: 1px solid #e2e8f0;
+    height: 70px;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.nav-logo {
+    height: 45px; /* Increased size for better visibility */
+    width: auto;
+    display: block; /* Ensures it's not hidden by inline-block issues */
+}
+
+.logo-text {
+    font-weight: 800;
+    font-size: 1.2rem;
+    color: var(--dark);
+    letter-spacing: -0.5px;
+}
+
+/* --- THE DARK LOGOUT BUTTON --- */
+.logout-btn-dark {
+    background: #1e293b !important; /* Slate Dark from your screenshot */
+    color: white !important;
+    padding: 10px 24px !important;
+    border-radius: 10px !important;
+    font-weight: 700;
+    font-size: 0.9rem;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.logout-btn-dark:hover {
+    background: #0f172a !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
 /* --- 1. FULL PAGE LAYOUT --- */
 .homepage {
     display: flex;
