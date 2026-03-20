@@ -135,3 +135,48 @@ body {
 .download-btn:hover {
     background: #2c3e50;
 }
+.podium-container {
+    padding: 10px 0;
+}
+
+.leader-row {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.rank-badge {
+    font-size: 1.5rem;
+    min-width: 40px;
+}
+
+.user-info {
+    flex-grow: 1;
+}
+
+.name-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.pts-label {
+    color: var(--dark-green);
+}
+
+.progress-bg {
+    background: #e0e0e0;
+    height: 10px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    background: linear-gradient(90deg, #2ecc71, #27ae60);
+    height: 100%;
+    border-radius: 10px;
+    transition: width 1s ease-in-out;
+}
