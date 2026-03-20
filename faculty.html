@@ -16,52 +16,47 @@
         </div>
     </nav>
 
-    <div class="faculty-grid">
+  <div class="container faculty-grid">
+    <div style="display: grid; grid-template-columns: 1fr 1.5fr; gap: 30px;">
         <aside>
-            <div class="card" style="margin-bottom: 20px;">
-                <h3>👤 Register Student</h3>
-                <input type="text" id="regName" placeholder="Full Name">
-                <input type="password" id="regPass" placeholder="Assign Password">
-                <button class="btn-main" onclick="addStudent()">Create Account</button>
-            </div>
-
-            <div class="card" style="margin-bottom: 20px;">
-                <h3>🎯 Credit Authorization</h3>
+            <div class="card animate">
+                <h3>👥 Manage Students</h3>
+                <input type="text" id="newStudentName" placeholder="New Name">
+                <input type="password" id="newStudentPass" placeholder="Password">
+                <button onclick="addStudent()" class="btn-main">Create Student</button>
+                <hr style="margin:20px 0; opacity:0.1;">
                 <select id="studentSelect"></select>
-                <input type="number" id="pointsInput" placeholder="Amount (e.g., 50)">
-                <button class="btn-main" onclick="assignPoints()">Update Credits</button>
-                <button class="btn-danger" onclick="removeStudent()">Delete Account</button>
+                <input type="number" id="pointsUpdate" placeholder="Points to add/subtract">
+                <button onclick="updatePoints()" class="btn-main">Update Credits</button>
+                <button onclick="deleteStudent()" style="background:#fff1f2; color:#ef4444; border:none; width:100%; padding:10px; margin-top:10px; border-radius:8px; cursor:pointer;">Remove Student</button>
             </div>
 
-            <div class="card">
-                <h3>🛒 Manage Shop</h3>
-                <input type="text" id="rewardName" placeholder="Reward Name">
-                <input type="number" id="rewardCost" placeholder="Cost (Pts)">
-                <button class="btn-main" style="background: var(--dark);" onclick="addReward()">Add Reward</button>
-                <div id="rewardListPreview" style="margin-top: 15px; font-size: 0.85rem;"></div>
+            <div class="card animate" style="margin-top:20px;">
+                <h3>🛒 Edit Reward Shop</h3>
+                <input type="text" id="shopItemName" placeholder="Item Name">
+                <input type="number" id="shopItemCost" placeholder="Cost">
+                <button onclick="addRewardItem()" class="btn-main" style="background:var(--secondary);">Add Item</button>
             </div>
         </aside>
 
         <main>
-            <div class="card" style="margin-bottom: 2rem;">
-                <h3>🏆 Live Leaderboard</h3>
-                <div id="leaderboardSection">
-                    </div>
+            <div class="card animate">
+                <h3>🏆 Real-time Leaderboard</h3>
+                
+                <div id="leaderboardDisplay"></div>
             </div>
 
-            <div class="card">
-                <h3>📜 Audit Logs</h3>
-                <div style="display: flex; gap: 10px; margin-bottom: 15px;">
-                    <button class="btn-outline" onclick="showLog('login')">Login Log</button>
-                    <button class="btn-outline" onclick="showLog('redeem')">Redemption Log</button>
+            <div class="card animate" style="margin-top:20px;">
+                <h3>📜 System Logs</h3>
+                <div style="display:flex; gap:10px; margin-bottom:15px;">
+                    <button onclick="renderLogs('login')" class="btn-outline">Login History</button>
+                    <button onclick="renderLogs('redeem')" class="btn-outline">Redemptions</button>
                 </div>
-                <table class="log-table">
-                    <thead><tr id="logHeader"></tr></thead>
-                    <tbody id="logBody"></tbody>
-                </table>
+                <div id="logTableWrapper" style="max-height: 300px; overflow-y: auto;"></div>
             </div>
         </main>
     </div>
-    <script src="app.js"></script>
+</div>
+    <script src.js"></script>
 </body>
 </html>
