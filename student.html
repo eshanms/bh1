@@ -1,49 +1,46 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Student Dashboard</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BHOOMIFY | Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-<body>
+<body onload="initStudent()">
 
-<script>
-if (localStorage.getItem("role") !== "student") {
-  window.location.href = "login.html";
-}
-</script>
+<div class="app-container">
+    <nav class="navbar">
+        <div class="logo">🌱 BHOOMIFY</div>
+        <button class="logout-btn" onclick="logout()">Logout</button>
+    </nav>
 
-<div class="container">
+    <div class="user-welcome">
+        <h1>Welcome, <span id="userName">User</span>!</h1>
+        <div class="points-badge">
+            <span id="points">0</span> <small>Points</small>
+        </div>
+    </div>
 
-<div class="header">Student Dashboard</div>
+    <div class="card">
+        <h3>📊 Community Leaderboard</h3>
+        <canvas id="leaderboardChart" width="400" height="200"></canvas>
+    </div>
 
-<div class="card">
-  <h3>Welcome, <span id="userName"></span></h3>
-  <h2>Points: <span id="points"></span></h2>
-</div>
+    <div class="card">
+        <h3>🎁 Eco-Rewards</h3>
+        <div class="rewards-grid" id="rewardsSection">
+            </div>
+    </div>
 
-<div class="card">
-  <h3>🏆 Leaderboard</h3>
-  <ul id="leaderboard"></ul>
-</div>
-
-<div class="card">
-  <h3>🎁 Rewards</h3>
-  <div id="rewards"></div>
-</div>
-
-<div class="card">
-  <h3>📜 History</h3>
-  <ul id="history"></ul>
-</div>
-
-<button onclick="logout()">Logout</button>
-
+    <div class="card">
+        <h3>📜 Your Activity History</h3>
+        <ul class="history-list" id="history">
+            </ul>
+    </div>
 </div>
 
 <script src="app.js"></script>
-<script>
-initStudent();
-</script>
-
 </body>
 </html>
+  
