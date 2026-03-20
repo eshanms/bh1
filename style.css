@@ -1,5 +1,116 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap');
+/* --- 1. FULL PAGE LAYOUT --- */
+.homepage {
+    display: flex;
+    min-height: 100vh;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
 
+/* --- 2. LEFT HERO SIDE (Fixed broken layout) --- */
+.hero-side {
+    flex: 1.2;
+    background: linear-gradient(rgba(16, 185, 129, 0.8), rgba(15, 23, 42, 0.9)), 
+                url('https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?q=80&w=1527&auto=format&fit=crop');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10% 80px; /* Responsive padding */
+}
+
+.hero-side h1 { 
+    font-size: 4rem; 
+    font-weight: 800; 
+    margin: 0; 
+    letter-spacing: -2px; 
+    line-height: 1.1;
+}
+
+.hero-side p { 
+    font-size: 1.2rem; 
+    opacity: 0.85; 
+    max-width: 480px; 
+    margin-top: 25px; 
+    line-height: 1.6; 
+}
+
+.footer-text {
+    margin-top: 50px;
+    font-size: 0.85rem;
+    opacity: 0.6;
+}
+
+/* --- 3. RIGHT LOGIN SIDE --- */
+.login-side {
+    flex: 0.8;
+    background: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+}
+
+.login-box { 
+    width: 100%; 
+    max-width: 380px; 
+}
+
+.login-box h2 { 
+    font-size: 2rem; 
+    font-weight: 800; 
+    margin-bottom: 10px; 
+    color: var(--dark); 
+}
+
+/* --- 4. INPUTS & FORM ELEMENTS --- */
+.input-group { margin-bottom: 24px; }
+
+.input-group label { 
+    display: block; 
+    font-weight: 600; 
+    margin-bottom: 8px; 
+    font-size: 0.9rem; 
+    color: var(--text-muted); 
+}
+
+input, select {
+    width: 100%;
+    padding: 14px 18px;
+    border: 2px solid #f1f5f9;
+    border-radius: var(--radius);
+    background: #f8fafc;
+    font-size: 1rem;
+    transition: 0.3s ease;
+}
+
+input:focus { 
+    border-color: var(--primary); 
+    background: white; 
+    box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1); 
+}
+
+/* --- 5. RESPONSIVE (Fix for Mobile) --- */
+@media (max-width: 1024px) {
+    .hero-side h1 { font-size: 3rem; }
+}
+
+@media (max-width: 768px) {
+    .homepage { flex-direction: column; }
+    .hero-side { 
+        padding: 60px 30px; 
+        min-height: 40vh; 
+        flex: none;
+    }
+    .login-side { 
+        padding: 50px 20px; 
+        flex: 1;
+    }
+}
 :root {
     /* Color Palette */
     --primary: #10b981;    /* Emerald Green */
