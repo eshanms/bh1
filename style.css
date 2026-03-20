@@ -1,50 +1,102 @@
+:root {
+    --primary-green: #2ecc71;
+    --dark-green: #27ae60;
+    --bg-light: #f4f7f6;
+    --white: #ffffff;
+    --text-dark: #2c3e50;
+}
+
 body {
-  margin: 0;
-  font-family: Arial;
-  background: #eafaf1;
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-light);
+    color: var(--text-dark);
 }
 
-.container {
-  max-width: 400px;
-  margin: auto;
-  min-height: 100vh;
-  background: white;
-  border-radius: 20px;
-  overflow: hidden;
+.app-container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding-bottom: 50px;
 }
 
-.header {
-  background: green;
-  color: white;
-  padding: 15px;
-  text-align: center;
+.navbar {
+    background: var(--dark-green);
+    color: white;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.user-welcome {
+    text-align: center;
+    padding: 20px;
+    background: linear-gradient(to bottom, var(--dark-green), var(--primary-green));
+    color: white;
+    border-radius: 0 0 30px 30px;
+}
+
+.points-badge {
+    font-size: 2.5rem;
+    font-weight: bold;
 }
 
 .card {
-  background: white;
-  margin: 15px;
-  padding: 15px;
-  border-radius: 15px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  animation: fadeIn 0.5s ease;
+    background: var(--white);
+    margin: 20px 15px;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
 }
 
-input {
-  width: 90%;
-  padding: 10px;
-  margin: 10px 0;
+/* Rewards Grid */
+.rewards-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
 }
 
-button {
-  width: 100%;
-  padding: 10px;
-  background: green;
-  color: white;
-  border: none;
-  border-radius: 10px;
+.reward-item {
+    border: 1px solid #eee;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    transition: 0.3s;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px);}
-  to { opacity: 1; transform: translateY(0);}
+.reward-item:hover { border-color: var(--primary-green); }
+
+.reward-item button {
+    background: var(--primary-green);
+    color: white;
+    border: none;
+    padding: 8px;
+    width: 100%;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
 }
+
+.history-list {
+    list-style: none;
+    padding: 0;
+}
+
+.history-list li {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    font-size: 0.9rem;
+}
+
+.logout-btn {
+    background: rgba(255,255,255,0.2);
+    border: 1px solid white;
+    color: white;
+    padding: 5px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+ 
