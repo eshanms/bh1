@@ -1,7 +1,73 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap');
 ### 2. Updated `style.css` (Fixing Logo Visibility)
 The logo might be "invisible" if it's white-on-white or too small. This CSS ensures it scales correctly and styles that dark logout button.
+/* --- FULL PAGE WRAPPER --- */
+.homepage {
+    display: flex;
+    height: 100vh; /* Forces the page to stay exactly the height of the screen */
+    width: 100%;
+    overflow: hidden; /* Prevents unwanted scrolling */
+}
 
+/* --- HERO SIDE (Fixed Content Positioning) --- */
+.hero-side {
+    flex: 1;
+    position: relative;
+    background: linear-gradient(rgba(16, 185, 129, 0.7), rgba(15, 23, 42, 0.8)), 
+                url('https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?q=80&w=1527&auto=format&fit=crop');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 10%;
+}
+
+/* Floating Logo (No white background) */
+.logo-overlay {
+    position: absolute;
+    top: 40px;
+    left: 40px;
+}
+.logo-overlay img {
+    height: 50px;
+    filter: brightness(0) invert(1); /* This turns a dark logo white for better visibility */
+}
+
+.hero-side h1 { font-size: 4rem; font-weight: 800; margin-bottom: 20px; line-height: 1.1; }
+.hero-side p { font-size: 1.2rem; opacity: 0.9; max-width: 450px; line-height: 1.6; }
+
+/* --- LOGIN SIDE (The Fix) --- */
+.login-side {
+    flex: 1;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+}
+
+.login-box {
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+}
+
+.help-text {
+    margin-top: 25px;
+    font-size: 0.9rem;
+    color: #64748b;
+    text-align: center;
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+    .homepage { flex-direction: column; overflow-y: auto; }
+    .hero-side { min-height: 50vh; padding: 60px 40px; }
+    .login-side { flex: none; min-height: 50vh; }
+}
 ```css
 /* --- SINGLE UNIFIED NAVBAR --- */
 .navbar {
