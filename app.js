@@ -1,121 +1,109 @@
-// --- Updated Data ---
+// --- 1. DATA ---
 let users = JSON.parse(localStorage.getItem("users")) || [
   { name: "Eshan", password: "123", role: "student", points: 120, history: [] },
-  { name: "Aneya", password: "123", role: "student", points: 90, history: [] },
+  { name: "Aneya", password: "123", role: "student", points: 180, history: [] },
   { name: "Faculty1", password: "admin", role: "faculty" }
+];
+
+const rewardsList = [
+  { name: "Eco Badge", cost: 50, icon: "🏅" },
+  { name: "Tree Sapling", cost: 150, icon: "🌱" },
+  { name: "Cafe Coupon", cost: 100, icon: "☕" }
 ];
 
 function saveUsers() { localStorage.setItem("users", JSON.stringify(users)); }
 
-// Ensure data is loaded from the start
-let users = JSON.parse(localStorage.getItem("users")) || [
-  { name: "Eshan", password: "123", role: "student", points: 120, history: [] },
-  { name: "Aneya", password: "123", role: "student", points: 180, history: [] }
-];
+// --- 2. LOGIN ---
+function login() {
+  const name = document.getElementById("username").value.trim();
+  const pass = document.getElementById("password").value;
+  const user = users.find(u => u.name.toLowerCase() === name.toLowerCase() && u.password === pass);
 
+  if (user) {
+    localStorage.setItem("user", user.name);
+    localStorage.setItem("role", user.role);
+    window.location.href = user.role === "student" ? "student.html" : "faculty.html";
+  } else {
+    alert("Invalid credentials!");
+  }
+}
+
+// --- 3. STUDENT DASHBOARD ---
 function initStudent() {
-    // 1. Get Logged in User
-    const currentUser = localStorage.getItem("user");
-    if (!currentUser) {
-        window.location.href = "login.html";
-        return;
-    }
+    const currentUserName = localStorage.getItem("user");
+    const user = users.find(u => u.name === currentUserName);
+    if (!user) { window.location.href = "index.html"; return; }
 
-    // 2. Find User Data
-    const user = users.find(u => u.name === currentUser);
+    document.getElementById("userName").innerText = user.name;
+    document.getElementById("points").innerText = user.points;
     
-    // 3. Update UI (Fixed Name & Points)
-    if (user) {
-        document.getElementById("userName").innerText = user.name;
-        document.getElementById("points").innerText = user.points;
-        renderInnovativeLeaderboard();
-        renderHistory(user);
-    }
+    updateLevel(user.points);
+    renderLeaderboard();
+    renderRewards(user.points);
+    renderHistory(user);
 }
 
-// INNOVATIVE LEADERBOARD: Podium + Growth Bars
-function renderInnovativeLeaderboard() {
-    const list = document.getElementById("leaderboardSection");
-    if (!list) return;
+function updateLevel(pts) {
+    let lvl = "Seed 🌰";
+    if (pts >= 100) lvl = "Sapling 🌱";
+    if (pts >= 250) lvl = "Tree 🌳";
+    const el = document.getElementById("userLevel");
+    if (el) el.innerText = lvl;
+}
 
-    // Sort students by points
-    const students = users.filter(u => u.role === "student")
-                          .sort((a, b) => b.points - a.points);
+function renderLeaderboard() {
+    const section = document.getElementById("leaderboardSection");
+    const students = users.filter(u => u.role === "student").sort((a,b) => b.points - a.points);
+    const max = students[0].points || 1;
 
-    let html = '<div class="podium-container">';
-    
-    students.forEach((s, index) => {
-        const rank = index + 1;
-        const medal = rank === 1 ? "🥇" : rank === 2 ? "🥈" : rank === 3 ? "🥉" : "🌱";
-        const barWidth = Math.min((s.points / students[0].points) * 100, 100);
-
-        html += `
-            <div class="leader-row">
-                <div class="rank-badge">${medal}</div>
-                <div class="user-info">
-                    <div class="name-row">
-                        <span>${s.name}</span>
-                        <span class="pts-label">${s.points} Pts</span>
-                    </div>
-                    <div class="progress-bg">
-                        <div class="progress-fill" style="width: ${barWidth}%"></div>
-                    </div>
-                </div>
+    section.innerHTML = students.map((s, i) => `
+        <div class="leader-row">
+            <div class="rank-badge">${i === 0 ? '🥇' : i === 1 ? '🥈' : '🌱'}</div>
+            <div class="user-info">
+                <div class="name-row"><span>${s.name}</span><span>${s.points} Pts</span></div>
+                <div class="progress-bg"><div class="progress-fill" style="width:${(s.points/max)*100}%"></div></div>
             </div>
-        `;
-    });
-
-    html += '</div>';
-    list.innerHTML = html;
-}
-
-// --- REWARDS & CLAIMING ---
-function redeem(rewardName, cost) {
-    const name = localStorage.getItem("user");
-    const user = users.find(u => u.name === name);
-
-    if (user.points >= cost) {
-        user.points -= cost;
-        // Record Activity
-        const date = new Date().toLocaleDateString();
-        user.history.unshift({ action: `Redeemed ${rewardName}`, date: date });
-        
-        saveUsers();
-        alert("🎉 Success! Reward claimed.");
-        location.reload();
-    } else {
-        alert("❌ Not enough points!");
-    }
-}
-
-// --- RENDER HISTORY ---
-function renderHistory(user) {
-    const historyList = document.getElementById("history");
-    if (!historyList) return;
-    
-    historyList.innerHTML = user.history.map(item => `
-        <div class="history-item">
-            <span>${item.action}</span>
-            <span class="history-date">${item.date}</span>
         </div>
     `).join("");
 }
 
-// Update the Faculty side to log history correctly
+function renderRewards(pts) {
+    const res = document.getElementById("rewardsSection");
+    res.innerHTML = rewardsList.map(r => `
+        <div class="reward-item">
+            ${r.icon}<br><strong>${r.name}</strong><br><small>${r.cost} Pts</small><br>
+            <button onclick="redeem('${r.name}', ${r.cost})" ${pts < r.cost ? 'disabled style="background:#ccc"' : ''}>Claim</button>
+        </div>
+    `).join("");
+}
+
+function redeem(name, cost) {
+    const user = users.find(u => u.name === localStorage.getItem("user"));
+    if (user.points >= cost) {
+        user.points -= cost;
+        user.history.unshift({ action: `Redeemed ${name}`, date: new Date().toLocaleDateString() });
+        saveUsers();
+        location.reload();
+    }
+}
+
+function renderHistory(user) {
+    document.getElementById("history").innerHTML = user.history.map(h => `
+        <div class="history-item"><span>${h.action}</span><span class="history-date">${h.date}</span></div>
+    `).join("");
+}
+
 function assignPoints() {
     const target = document.getElementById("studentName").value;
     const pts = parseInt(document.getElementById("pointsInput").value);
-    const student = users.find(u => u.name === target && u.role === "student");
-
-    if (student && !isNaN(pts)) {
+    const student = users.find(u => u.name === target);
+    if (student) {
         student.points += pts;
-        const date = new Date().toLocaleDateString();
-        student.history.unshift({ action: `Earned ${pts} points`, date: date });
-        
+        student.history.unshift({ action: `Earned ${pts} Pts`, date: new Date().toLocaleDateString() });
         saveUsers();
-        alert("Points added to " + target);
+        alert("Points added!");
         location.reload();
-    } else {
-        alert("Student not found!");
     }
 }
+
+function logout() { localStorage.clear(); window.location.href = "index.html"; }
