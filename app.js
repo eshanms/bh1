@@ -1,6 +1,43 @@
 // --- 1. DATA INITIALIZATION (Persistence Optimized) ---
 let users = JSON.parse(localStorage.getItem("users"));
+// --- NEW: ADD STUDENT FUNCTION (FACULTY ONLY) ---
+function addStudent() {
+    const newName = document.getElementById("regName").value.trim();
+    const newPass = document.getElementById("regPass").value;
 
+    if (!newName || !newPass) {
+        alert("Please enter both name and password.");
+        return;
+    }
+
+    // Check if student already exists
+    const exists = users.find(u => u.name.toLowerCase() === newName.toLowerCase());
+    if (exists) {
+        alert("This student name is already registered.");
+        return;
+    }
+
+    // Add new student object
+    const newStudent = {
+        name: newName,
+        password: newPass,
+        role: "student",
+        points: 0,
+        history: [{ action: "Account Created", date: new Date().toLocaleDateString() }]
+    };
+
+    users.push(newStudent);
+    saveAll(); // Citing the saveAll function from previous context to persist data
+    
+    // UI Updates
+    alert(`Success! ${newName} has been added.`);
+    document.getElementById("regName").value = "";
+    document.getElementById("regPass").value = "";
+    
+    // Refresh the faculty view components
+    updateStudentSelect();
+    renderLeaderboard();
+}
 // Only load defaults if the database is completely empty
 if (!users) {
     users = [
