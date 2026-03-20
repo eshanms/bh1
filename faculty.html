@@ -26,7 +26,27 @@
                 <button class="btn-main" onclick="assignPoints()">Update Points</button>
                 <button class="btn-delete" onclick="removeStudent()" style="width:100%; margin-top:10px">Remove User</button>
             </div>
-            
+            <div class="app-container">
+    <div class="card">
+        <h3>🎯 Authorize Green Credits</h3>
+        <select id="studentSelect" class="input-field">
+            <option>-- Select Student --</option>
+        </select>
+        <input type="number" id="pointAmount" placeholder="Points (e.g. 50)" class="input-field">
+        <button class="btn-main" onclick="updateCredits()">Update Credits</button>
+    </div>
+
+    <div class="card">
+        <h3>🛒 Manage Rewards Shop</h3>
+        <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+            <input type="text" id="rewardName" placeholder="Reward Name" class="input-field">
+            <input type="number" id="rewardCost" placeholder="Cost" class="input-field">
+            <button class="btn-main" onclick="addReward()">Add to Shop</button>
+        </div>
+        <div id="activeRewardsList">
+            </div>
+    </div>
+</div>
             <div class="card">
                 <h3>📜 Audit Logs</h3>
                 <details class="log-details" open><summary>Login History</summary>
