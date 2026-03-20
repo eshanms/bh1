@@ -3,42 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BHOOMIFY | Dashboard</title>
+    <title>BHOOMIFY | Student Dashboard</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body onload="initStudent()">
     <nav class="nav-container">
-        <img src="logo.png" alt="BHOOMIFY" class="site-logo"> 
-        <button class="btn-black" onclick="logout()" style="width: auto; padding: 10px 20px;">Logout</button>
+        <img src="logo.png" alt="BHOOMIFY Logo" class="site-logo">
+        <button class="btn-black" onclick="logout()" style="width:auto; padding: 10px 20px;">Sign Out</button>
     </nav>
 
     <div class="editorial-grid">
         <main>
             <section class="panel">
-                <p style="text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.7rem; font-weight: 700;">Account Balance</p>
+                <p style="text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.75rem; font-weight: 700; color: var(--brand-green);">Credit Balance</p>
                 <div class="points-hero" id="points">0</div>
-                <h2 style="margin:0;">Hello, <span id="userName">Student</span>.</h2>
-                <p id="userLevel" style="color: var(--brand-green); font-weight: 600;">Seed Status</p>
+                <h2>Greetings, <span id="userName">User</span></h2>
+                <p id="userLevel" style="font-weight: 600;">Status: Loading...</p>
             </section>
 
             <section class="panel">
-                <h3 style="margin-bottom: 30px;">Curated Rewards</h3>
+                <h3>Rewards Catalog</h3>
                 <div id="rewardsSection" class="reward-grid"></div>
             </section>
 
             <section class="panel">
-                <h3 style="margin-bottom: 30px;">Activity History</h3>
+                <h3>Activity Journal</h3>
                 <div id="history"></div>
             </section>
         </main>
 
         <aside>
             <div class="panel">
-                <h3 style="margin-bottom: 20px;">Top Contributors</h3>
+                <h3>Standings</h3>
                 <div id="leaderboardSection"></div>
             </div>
-            
-            <a href="BHOOMIFY.pdf" target="_blank" class="btn-black" style="display: block; text-decoration: none; text-align: center;">Project Report</a>
+            <a href="BHOOMIFY.pdf" target="_blank" class="btn-black" style="display:block; text-decoration:none; text-align:center;">Download Project PDF</a>
         </aside>
     </div>
 
