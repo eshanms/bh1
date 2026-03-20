@@ -106,4 +106,112 @@ function assignPoints() {
     }
 }
 
+let rewardsList = JSON.parse(localStorage.getItem("rewards")) || [
+  { name: "Eco Badge", cost: 50, icon: "🏅" },
+  { name: "Tree Sapling", cost: 150, icon: "🌱" }
+];
+
+function saveAll() {
+    localStorage.setItem("users", JSON.stringify(users));
+    localStorage.setItem("rewards", JSON.stringify(rewardsList));
+}
+
+// --- FACULTY INITIALIZATION ---
+function initFaculty() {
+    renderStudentList();
+    renderRewardsAdmin();
+    renderLeaderboard(); // Reuse your leaderboard function
+    updateStudentSelect();
+}
+
+// --- STUDENT MANAGEMENT ---
+function addStudent() {
+    const name = document.getElementById("newStudentName").value.trim();
+    const pass = document.getElementById("newStudentPass").value;
+
+    if (name && pass) {
+        users.push({ name, password: pass, role: "student", points: 0, history: [] });
+        saveAll();
+        alert("Student Added!");
+        location.reload();
+    }
+}
+
+function removeStudent(index) {
+    if(confirm("Are you sure you want to remove this student?")) {
+        users.splice(index, 1);
+        saveAll();
+        location.reload();
+    }
+}
+
+function renderStudentList() {
+    const container = document.getElementById("studentListAdmin");
+    container.innerHTML = "<h4>All Students</h4>";
+    users.forEach((u, i) => {
+        if(u.role === 'student') {
+            container.innerHTML += `
+                <div class="history-item">
+                    <span>${u.name} (${u.points} pts)</span>
+                    <button onclick="removeStudent(${i})" style="width:auto; padding:5px; background:red;">Remove</button>
+                </div>
+            `;
+        }
+    });
+}
+
+// --- REWARD MANAGEMENT ---
+let editIndex = -1;
+
+function addReward() {
+    const name = document.getElementById("rewardName").value;
+    const cost = parseInt(document.getElementById("rewardCost").value);
+    const icon = document.getElementById("rewardIcon").value;
+
+    if (editIndex === -1) {
+        rewardsList.push({ name, cost, icon });
+    } else {
+        rewardsList[editIndex] = { name, cost, icon };
+        editIndex = -1;
+    }
+    saveAll();
+    location.reload();
+}
+
+function deleteReward(index) {
+    rewardsList.splice(index, 1);
+    saveAll();
+    location.reload();
+}
+
+function editReward(index) {
+    const r = rewardsList[index];
+    document.getElementById("rewardName").value = r.name;
+    document.getElementById("rewardCost").value = r.cost;
+    document.getElementById("rewardIcon").value = r.icon;
+    document.getElementById("rewardActionBtn").innerText = "Update Reward";
+    editIndex = index;
+}
+
+function renderRewardsAdmin() {
+    const container = document.getElementById("rewardsListAdmin");
+    container.innerHTML = rewardsList.map((r, i) => `
+        <div class="history-item">
+            <span>${r.icon} ${r.name} - ${r.cost} pts</span>
+            <div>
+                <button onclick="editReward(${i})" style="width:auto; padding:5px; background:orange;">Edit</button>
+                <button onclick="deleteReward(${i})" style="width:auto; padding:5px; background:red;">X</button>
+            </div>
+        </div>
+    `).join("");
+}
+
+// --- UTILITIES ---
+function updateStudentSelect() {
+    const select = document.getElementById("studentSelect");
+    users.filter(u => u.role === 'student').forEach(u => {
+        select.innerHTML += `<option value="${u.name}">${u.name}</option>`;
+    });
+}
 function logout() { localStorage.clear(); window.location.href = "index.html"; }
+
