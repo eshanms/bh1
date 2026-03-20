@@ -212,3 +212,35 @@ summary { padding: 20px; font-weight: 700; cursor: pointer; list-style: none; di
     .hero-side h1 { font-size: 3rem; }
     .grid-layout { grid-template-columns: 1fr; }
 }
+/* ... Keep your existing CSS above ... */
+
+/* --- FIXING THE LOGOUT BUTTON --- */
+.navbar .btn-main, .navbar .logout-btn {
+    width: auto !important;
+    padding: 10px 20px !important;
+    font-size: 0.9rem !important;
+    margin-top: 0;
+}
+
+/* --- LOG TABLES & TABS --- */
+.tabs { display: flex; gap: 10px; margin-bottom: 20px; }
+.btn-tab { 
+    background: #f1f5f9; 
+    border: none; 
+    padding: 10px 20px; 
+    border-radius: 8px; 
+    cursor: pointer; 
+    font-weight: 600; 
+}
+.btn-tab.active { background: var(--primary); color: white; }
+
+.log-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+.log-table th { text-align: left; padding: 12px; background: #f8fafc; border-bottom: 2px solid #f1f5f9; font-size: 0.8rem; text-transform: uppercase; }
+.log-table td { padding: 12px; border-bottom: 1px solid #f1f5f9; font-size: 0.9rem; }
+
+/* --- REWARD ITEM GRID --- */
+.reward-item {
+    transition: 0.3s;
+}
+.reward-item:hover { transform: translateY(-5px); border-color: var(--primary) !important; }
+.reward-item button { padding: 8px; font-size: 0.8rem; }
