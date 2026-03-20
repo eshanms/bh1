@@ -1,64 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8"><title>BHOOMIFY | Faculty</title>
+    <meta charset="UTF-8"><title>BHOOMIFY | Faculty Admin</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body onload="initFaculty()">
     <nav class="navbar">
-        <div class="logo-container"><img src="logo.png" alt="Logo" class="nav-logo"> <strong>Faculty</strong></div>
-        <div><span id="adminName"></span> <button class="logout-btn-dark" onclick="logout()">Logout</button></div>
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <img src="logo.png" class="nav-logo">
+            <strong style="letter-spacing: 1px;">FACULTY PORTAL</strong>
+        </div>
+        <div>
+            <span id="adminName" style="margin-right: 15px; font-weight: 600;">Admin</span>
+            <button class="btn-outline" onclick="logout()" style="padding: 8px 15px; cursor: pointer;">Logout</button>
+        </div>
     </nav>
-    <div class="app-container">
-        <div class="grid-layout">
-            <div class="card">
-                <h3>🌱 Student Management</h3>
-                <label>Register New</label>
-                <input type="text" id="regName" placeholder="Name">
-                <input type="password" id="regPass" placeholder="Password">
-                <button class="btn-main" onclick="addStudent()" style="margin-bottom:20px">Add Student</button>
-                
-                <hr>
-                <label>Assign Credits / Delete</label>
-                <select id="studentSelect"></select>
-                <input type="text" id="manualName" placeholder="Or type name manually">
-                <input type="number" id="pointsInput" placeholder="Points">
-                <button class="btn-main" onclick="assignPoints()">Update Points</button>
-                <button class="btn-delete" onclick="removeStudent()" style="width:100%; margin-top:10px">Remove User</button>
-            </div>
-            <div class="app-container">
-   <div class="container">
-    <div class="grid-2">
-        <div class="card">
-            <h3>🎯 Authorize Green Credits</h3>
-            <select id="studentSelect" style="width: 100%; padding: 12px; margin-bottom: 15px; border-radius: 8px; border: 1px solid #ddd;">
-                <option value="">-- Select Student --</option>
-            </select>
-            <input type="number" id="pointAmount" placeholder="Points (e.g., 50)" style="width: 100%; padding: 12px; margin-bottom: 15px; border-radius: 8px; border: 1px solid #ddd;">
-            <button class="btn-primary" style="width: 100%;" onclick="updateCredits()">Update Credits</button>
-        </div>
 
-        <div class="card">
-            <h3>🛒 Reward Shop Editor</h3>
-            <input type="text" id="newRewardName" placeholder="Reward Name" style="width: 100%; padding: 10px; margin-bottom: 10px;">
-            <input type="number" id="newRewardCost" placeholder="Cost" style="width: 100%; padding: 10px; margin-bottom: 10px;">
-            <button class="btn-primary" style="width: 100%; background: #1e293b;" onclick="addNewReward()">Add to Shop</button>
-            <hr style="margin: 20px 0; border: 0; border-top: 1px solid #eee;">
-            <div id="activeRewardsList"></div>
-        </div>
-    </div>
-</div>
+    <div class="faculty-grid">
+        <aside>
+            <div class="card" style="margin-bottom: 20px;">
+                <h3>👤 Register Student</h3>
+                <input type="text" id="regName" placeholder="Full Name">
+                <input type="password" id="regPass" placeholder="Assign Password">
+                <button class="btn-main" onclick="addStudent()">Create Account</button>
+            </div>
+
+            <div class="card" style="margin-bottom: 20px;">
+                <h3>🎯 Credit Authorization</h3>
+                <select id="studentSelect"></select>
+                <input type="number" id="pointsInput" placeholder="Amount (e.g., 50)">
+                <button class="btn-main" onclick="assignPoints()">Update Credits</button>
+                <button class="btn-danger" onclick="removeStudent()">Delete Account</button>
+            </div>
+
+            <div class="card">
+                <h3>🛒 Manage Shop</h3>
+                <input type="text" id="rewardName" placeholder="Reward Name">
+                <input type="number" id="rewardCost" placeholder="Cost (Pts)">
+                <button class="btn-main" style="background: var(--dark);" onclick="addReward()">Add Reward</button>
+                <div id="rewardListPreview" style="margin-top: 15px; font-size: 0.85rem;"></div>
+            </div>
+        </aside>
+
+        <main>
+            <div class="card" style="margin-bottom: 2rem;">
+                <h3>🏆 Live Leaderboard</h3>
+                <div id="leaderboardSection">
+                    </div>
+            </div>
+
             <div class="card">
                 <h3>📜 Audit Logs</h3>
-                <details class="log-details" open><summary>Login History</summary>
-                    <table class="log-table"><thead><tr><th>User</th><th>Action</th><th>Time</th></tr></thead><tbody id="loginBody"></tbody></table>
-                </details>
-                <details class="log-details"><summary>Redemption History</summary>
-                    <table class="log-table"><thead><tr><th>User</th><th>Item</th><th>Time</th></tr></thead><tbody id="redeemLogBody"></tbody></table>
-                </details>
-                <div class="card" style="margin-top:20px"><h3>🏆 Leaderboard</h3><div id="leaderboardSection"></div></div>
+                <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+                    <button class="btn-outline" onclick="showLog('login')">Login Log</button>
+                    <button class="btn-outline" onclick="showLog('redeem')">Redemption Log</button>
+                </div>
+                <table class="log-table">
+                    <thead><tr id="logHeader"></tr></thead>
+                    <tbody id="logBody"></tbody>
+                </table>
             </div>
-        </div>
+        </main>
     </div>
     <script src="app.js"></script>
 </body>
