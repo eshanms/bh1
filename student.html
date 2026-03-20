@@ -9,50 +9,33 @@
 <body onload="initStudent()">
 
     <nav class="navbar">
-        <div class="logo-container">
-            <img src="logo.png" alt="Bhoomify" class="nav-logo">
-            <span class="logo-text">BHOOMIFY</span>
-        </div>
-        <div class="admin-meta">
-            <button class="logout-btn-dark" onclick="logout()">Logout</button>
-        </div>
-    </nav>
-
-    <div class="app-container">
-        <div class="user-card">
-            <p style="text-transform: uppercase; letter-spacing: 2px; font-weight: 700; opacity: 0.8; font-size: 0.8rem;">Current Balance</p>
-            <div class="points-display" id="points">0</div>
-            <p><span id="userName" style="font-weight: 800;">User</span> • <span id="userLevel">Seed</span></p>
-        </div>
-
-        <div class="grid-layout">
-            <div>
-                <div class="card">
-                    <h3>🎁 Claim Rewards</h3>
-                    <div id="rewardsSection" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
-                        </div>
-                </div>
-                
-                <div class="card">
-                    <h3>📜 Activity History</h3>
-                    <div id="history">
-                        </div>
-                </div>
-            </div>
-
-            <div>
-                <div class="card">
-                    <h3>🏆 Leaderboard</h3>
-                    <div id="leaderboardSection">
-                        </div>
-                </div>
-                
-                <a href="BHOOMIFY.pdf" target="_blank" class="btn-main" style="text-decoration:none; display: block; text-align:center; background: #1e293b;">
-                    Project Report (PDF)
-                </a>
-            </div>
-        </div>
+    <div class="logo-container">
+        <img src="logo.png" alt="Bhoomify" class="nav-logo">
+        <span class="logo-text">BHOOMIFY</span>
     </div>
+    <button class="logout-btn" onclick="logout()">Logout</button>
+</nav>
+
+<div class="app-container">
+    <div class="card" style="background: linear-gradient(135deg, #064e3b, #065f46); color: white;">
+        <p style="opacity: 0.8; font-size: 0.8rem; text-transform: uppercase;">Current Balance</p>
+        <h1 id="points" style="font-size: 3rem; margin: 10px 0;">70</h1>
+        <p><strong id="userName">Eshan</strong> • <span id="userLevel">Seed</span></p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 20px;">
+        <section class="card">
+            <h3>🎁 Reward Shop</h3>
+            <div id="rewardsSection" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                </div>
+        </section>
+
+        <section class="card">
+            <h3>🏆 Top Contributors</h3>
+            <div id="leaderboardSection"></div>
+        </section>
+    </div>
+</div>
 
     <script src="app.js"></script>
 </body>
