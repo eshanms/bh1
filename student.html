@@ -9,31 +9,30 @@
 <body onload="initStudent()">
 
     <nav class="navbar">
-    <div class="logo-container">
-        <img src="logo.png" alt="Bhoomify" class="nav-logo">
-        <span class="logo-text">BHOOMIFY</span>
+    <div class="logo-box">
+        <img src="logo.png">
+        <h1>BHOOMIFY</h1>
     </div>
-    <button class="logout-btn" onclick="logout()">Logout</button>
+    <button class="btn-outline" onclick="logout()">Logout</button>
 </nav>
 
-<div class="app-container">
-    <div class="card" style="background: linear-gradient(135deg, #064e3b, #065f46); color: white;">
-        <p style="opacity: 0.8; font-size: 0.8rem; text-transform: uppercase;">Current Balance</p>
-        <h1 id="points" style="font-size: 3rem; margin: 10px 0;">70</h1>
-        <p><strong id="userName">Eshan</strong> • <span id="userLevel">Seed</span></p>
+<div class="container">
+    <div class="card" style="background: linear-gradient(135deg, #065f46, #047857); color: white; border: none;">
+        <p style="text-transform: uppercase; font-size: 0.75rem; letter-spacing: 2px;">Your Eco Balance</p>
+        <h1 id="points" style="font-size: 3.5rem; margin: 10px 0;">00</h1>
+        <p><strong id="userName">User</strong> • <span id="userLevel">Seedling</span></p>
     </div>
 
-    <div style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 20px;">
-        <section class="card">
-            <h3>🎁 Reward Shop</h3>
+    <div class="grid-2">
+        <div class="card">
+            <h3>🎁 Available Rewards</h3>
             <div id="rewardsSection" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
                 </div>
-        </section>
-
-        <section class="card">
-            <h3>🏆 Top Contributors</h3>
+        </div>
+        <div class="card">
+            <h3>🏆 Campus Leaderboard</h3>
             <div id="leaderboardSection"></div>
-        </section>
+        </div>
     </div>
 </div>
 
