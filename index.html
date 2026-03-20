@@ -1,48 +1,44 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BHOOMIFY | Eco-Rewards</title>
     <link rel="stylesheet" href="style.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
     <div class="homepage">
         <header class="hero">
             <h1>🌱 BHOOMIFY</h1>
             <p>Gamifying Sustainability for a Greener Campus.</p>
-            <a href="#login-section" class="btn-main">Get Started</a>
+            <a href="#login-section" class="btn-main">Join the Movement</a>
         </header>
 
         <section class="info-section">
             <h2>What is Bhoomify?</h2>
-            <p>Bhoomify is a platform where students earn points for eco-friendly actions like waste segregation, planting trees, and reducing plastic use.</p>
+            <p>Earn green credits for eco-friendly actions like waste segregation and tree planting.</p>
             
             <div class="how-to-grid">
-                <div class="step-card">
-                    <span>1</span>
-                    <h4>Perform Action</h4>
-                    <p>Segregate waste or plant a sapling.</p>
-                </div>
-                <div class="step-card">
-                    <span>2</span>
-                    <h4>Get Verified</h4>
-                    <p>Show your action to a faculty member.</p>
-                </div>
-                <div class="step-card">
-                    <span>3</span>
-                    <h4>Claim Points</h4>
-                    <p>Faculty adds points to your Bhoomify ID.</p>
-                </div>
+                <div class="step-card"><span>1</span> <h4>Act</h4><p>Perform an eco-action on campus.</p></div>
+                <div class="step-card"><span>2</span> <h4>Verify</h4><p>Show a faculty member your work.</p></div>
+                <div class="step-card"><span>3</span> <h4>Earn</h4><p>Get points and claim real rewards!</p></div>
             </div>
         </section>
 
-        <section id="login-section" class="login-card-container">
-            <div class="card">
-                <h3>Login to Dashboard</h3>
-                <input type="text" id="username" placeholder="Username">
-                <input type="password" id="password" placeholder="Password">
-                <button onclick="login()">Login</button>
+        <section class="info-section" style="background: #f9f9f9;">
+            <h2>Rewards We Offer</h2>
+            <div class="rewards-grid">
+                <div class="reward-item">🏅<br><strong>Eco Badge</strong><br><small>50 Pts</small></div>
+                <div class="reward-item">🌱<br><strong>Tree Sapling</strong><br><small>150 Pts</small></div>
+                <div class="reward-item">☕<br><strong>Cafe Coupon</strong><br><small>100 Pts</small></div>
             </div>
+        </section>
+
+        <section id="login-section" class="card" style="margin: 40px 20px;">
+            <h3 style="text-align: center;">Login to Dashboard</h3>
+            <input type="text" id="username" placeholder="Username">
+            <input type="password" id="password" placeholder="Password">
+            <button onclick="login()">Login</button>
         </section>
     </div>
     <script src="app.js"></script>
