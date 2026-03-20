@@ -1,91 +1,87 @@
-// --- 1. SETUP DATA (Include initial history for demo) ---
+// --- Updated Data ---
 let users = JSON.parse(localStorage.getItem("users")) || [
-  { name: "Eshan", password: "123", role: "student", points: 120, history: ["Joined Bhoomify"] },
-  { name: "Aneya", password: "123", role: "student", points: 180, history: ["Waste Segregation +50"] },
+  { name: "Eshan", password: "123", role: "student", points: 120, history: [] },
+  { name: "Aneya", password: "123", role: "student", points: 90, history: [] },
   { name: "Faculty1", password: "admin", role: "faculty" }
-];
-
-const rewardsList = [
-  { id: 1, name: "Eco Badge", cost: 50, icon: "🏅" },
-  { id: 2, name: "Tree Sapling", cost: 150, icon: "🌱" },
-  { id: 3, name: "Cafeteria Coupon", cost: 100, icon: "☕" }
 ];
 
 function saveUsers() { localStorage.setItem("users", JSON.stringify(users)); }
 
-function initStudent() {
-  const name = localStorage.getItem("user");
-  const user = users.find(u => u.name === name);
-  if (!user) { window.location.href = "login.html"; return; }
-
-  document.getElementById("userName").innerText = user.name;
-  document.getElementById("points").innerText = user.points;
-
-  renderLeaderboard();
-  renderRewards(user);
-  renderHistory(user);
-}
-
-// --- NEW: GRAPH LEADERBOARD ---
+// --- FIXED GRAPH FUNCTION ---
 function renderLeaderboard() {
-  const students = users.filter(u => u.role === "student");
-  const names = students.map(s => s.name);
-  const points = students.map(s => s.points);
+    const canvas = document.getElementById('leaderboardChart');
+    if (!canvas) return;
 
-  const ctx = document.getElementById('leaderboardChart').getContext('2d');
-  new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: names,
-      datasets: [{
-        label: 'Points Scored',
-        data: points,
-        backgroundColor: '#2ecc71',
-        borderRadius: 5
-      }]
-    },
-    options: { scales: { y: { beginAtZero: true } } }
-  });
+    const students = users.filter(u => u.role === "student");
+    const names = students.map(s => s.name);
+    const points = students.map(s => s.points);
+
+    // Wait for Chart.js to be ready
+    if (typeof Chart !== 'undefined') {
+        new Chart(canvas, {
+            type: 'bar',
+            data: {
+                labels: names,
+                datasets: [{
+                    label: 'Points Scored',
+                    data: points,
+                    backgroundColor: '#2ecc71'
+                }]
+            },
+            options: { responsive: true, scales: { y: { beginAtZero: true } } }
+        });
+    } else {
+        setTimeout(renderLeaderboard, 500); // Retry if library not loaded
+    }
 }
 
-function renderRewards(user) {
-  const container = document.getElementById("rewardsSection");
-  container.innerHTML = "";
-  rewardsList.forEach(reward => {
-    const item = document.createElement("div");
-    item.className = "reward-item";
-    item.innerHTML = `
-      <div>${reward.icon}</div>
-      <strong>${reward.name}</strong>
-      <p>${reward.cost} Pts</p>
-      <button onclick="redeem('${reward.name}', ${reward.cost})">Claim</button>
-    `;
-    container.appendChild(item);
-  });
-}
-
+// --- REWARDS & CLAIMING ---
 function redeem(rewardName, cost) {
-  const name = localStorage.getItem("user");
-  const user = users.find(u => u.name === name);
-  
-  if (user.points >= cost) {
-    user.points -= cost;
-    user.history.unshift(`Redeemed ${rewardName} (-${cost})`);
-    saveUsers();
-    alert("Reward Claimed!");
-    location.reload();
-  } else {
-    alert("Not enough points!");
-  }
+    const name = localStorage.getItem("user");
+    const user = users.find(u => u.name === name);
+
+    if (user.points >= cost) {
+        user.points -= cost;
+        // Record Activity
+        const date = new Date().toLocaleDateString();
+        user.history.unshift({ action: `Redeemed ${rewardName}`, date: date });
+        
+        saveUsers();
+        alert("🎉 Success! Reward claimed.");
+        location.reload();
+    } else {
+        alert("❌ Not enough points!");
+    }
 }
 
+// --- RENDER HISTORY ---
 function renderHistory(user) {
-  const list = document.getElementById("history");
-  list.innerHTML = user.history.map(h => `<li>${h}</li>`).join("");
+    const historyList = document.getElementById("history");
+    if (!historyList) return;
+    
+    historyList.innerHTML = user.history.map(item => `
+        <div class="history-item">
+            <span>${item.action}</span>
+            <span class="history-date">${item.date}</span>
+        </div>
+    `).join("");
 }
 
-function logout() {
-  localStorage.removeItem("user");
-  localStorage.removeItem("role");
-  window.location.href = "login.html";
+// Update the Faculty side to log history correctly
+function assignPoints() {
+    const target = document.getElementById("studentName").value;
+    const pts = parseInt(document.getElementById("pointsInput").value);
+    const student = users.find(u => u.name === target && u.role === "student");
+
+    if (student && !isNaN(pts)) {
+        student.points += pts;
+        const date = new Date().toLocaleDateString();
+        student.history.unshift({ action: `Earned ${pts} points`, date: date });
+        
+        saveUsers();
+        alert("Points added to " + target);
+        location.reload();
+    } else {
+        alert("Student not found!");
+    }
 }
