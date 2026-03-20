@@ -8,7 +8,24 @@
     padding: 0;
     overflow-x: hidden;
 }
+/* --- LOGO STYLING --- */
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
 
+.nav-logo {
+    height: 40px; /* Adjust height based on your preference */
+    width: auto;
+    object-fit: contain;
+}
+
+/* Ensure the navbar doesn't squeeze the logo */
+.navbar {
+    padding: 10px 5%;
+    height: 70px;
+}
 /* --- 2. LEFT HERO SIDE (Fixed broken layout) --- */
 .hero-side {
     flex: 1.2;
