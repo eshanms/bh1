@@ -5,31 +5,16 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-<script>
-if (localStorage.getItem("role") !== "faculty") {
-  window.location.href = "login.html";
-}
-</script>
-
 <div class="container">
-
-<div class="header">Faculty Dashboard</div>
-
-<div class="card">
-  <h3>Assign Points</h3>
-
-  <input type="text" id="studentName" placeholder="Student Name"><br>
-  <input type="number" id="pointsInput" placeholder="Points"><br>
-
-  <button onclick="assignPoints()">Assign</button>
+    <div class="header">👨‍🏫 Faculty Control</div>
+    <div class="card">
+      <h3>Assign Green Credits</h3>
+      <input type="text" id="studentName" placeholder="Student Name">
+      <input type="number" id="pointsInput" placeholder="Points (e.g. 50)">
+      <button onclick="assignPoints()">Update Student Points</button>
+    </div>
+    <button onclick="logout()" style="background:#666;">Logout</button>
 </div>
-
-<button onclick="logout()">Logout</button>
-
-</div>
-
 <script src="app.js"></script>
-
 </body>
 </html>
