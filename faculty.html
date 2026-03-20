@@ -2,49 +2,54 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BHOOMIFY | Faculty</title>
+    <title>BHOOMIFY | Faculty Admin</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body onload="initFaculty()">
-    <div class="app-container">
-        <div class="navbar">
-            <div class="logo">👨‍🏫 Faculty Admin</div>
-            <button class="btn-main" onclick="logout()" style="width: auto; padding: 10px 20px; background: #f1f5f9; color: var(--dark);">Logout</button>
-        </div>
 
-        <div class="grid-layout">
-            <div class="actions-side">
-                <details class="admin-card" open>
-                    <summary>🎯 Assign Green Credits</summary>
-                    <div class="content">
-                        <select id="studentSelect"></select>
-                        <input type="text" id="manualName" placeholder="Or type student name manually" style="margin-top: 10px;">
-                        <input type="number" id="pointsInput" placeholder="Amount of points (e.g. 50)">
-                        <button class="btn-main" onclick="assignPoints()">Update Credits</button>
-                    </div>
-                </details>
+<div class="navbar">
+    <div style="font-weight:bold; font-size:1.2rem;">👨‍🏫 Faculty Portal</div>
+    <button class="logout-btn" onclick="logout()">Logout</button>
+</div>
 
-                <details class="admin-card">
-                    <summary>👥 Manage Student Database</summary>
-                    <div class="content">
-                        <input type="text" id="newStudentName" placeholder="Full Name">
-                        <input type="password" id="newStudentPass" placeholder="Password">
-                        <button class="btn-main" onclick="addStudent()">Add Student</button>
-                        <div id="studentListAdmin" style="margin-top: 20px;"></div>
-                    </div>
-                </details>
-            </div>
-
-            <div class="display-side">
-                <div class="card">
-                    <h3>🏆 Live Leaderboard</h3>
-                    <div id="leaderboardSection"></div>
-                </div>
-            </div>
-        </div>
+<div class="app-container">
+    <div class="card admin-card">
+        <h3>🎯 Authorize Green Credits</h3>
+        <select id="studentSelect"></select>
+        <input type="text" id="manualName" placeholder="Or type student name manually">
+        <input type="number" id="pointsInput" placeholder="Points amount">
+        <button onclick="assignPoints()">Update Credits</button>
     </div>
-    <script src="app.js"></script>
-</body>
-</html> 
 
+    <div class="card admin-card">
+        <h3>🎁 Manage Rewards Catalog</h3>
+        <div style="display:flex; gap:10px;">
+            <input type="text" id="rewardName" placeholder="Reward Name">
+            <input type="number" id="rewardCost" placeholder="Points Cost">
+            <input type="text" id="rewardIcon" placeholder="Emoji" style="width:80px;">
+        </div>
+        <button onclick="addReward()">+ Add Reward to Shop</button>
+        <div id="rewardsListAdmin" style="margin-top:15px;"></div>
+    </div>
+
+    <div class="card">
+        <h3>📜 System Audit Logs</h3>
+        <div class="tabs">
+            <button class="btn-tab active" id="tabLogin" onclick="showLog('login')">Login History</button>
+            <button class="btn-tab" id="tabRedeem" onclick="showLog('redeem')">Reward Redemptions</button>
+        </div>
+        <table class="log-table">
+            <thead><tr id="tableHead"><th>User</th><th>Action</th><th>Timestamp</th></tr></thead>
+            <tbody id="logBody"></tbody>
+        </table>
+    </div>
+
+    <div class="card">
+        <h3>🏆 Top Performing Students</h3>
+        <div id="leaderboardSection" class="leaderboard-container"></div>
+    </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
