@@ -6,7 +6,26 @@ let users = JSON.parse(localStorage.getItem("users")) || [
 ];
 
 function saveUsers() { localStorage.setItem("users", JSON.stringify(users)); }
+function initStudent() {
+  // Ensure the page is fully loaded before drawing the chart
+  window.addEventListener('load', function() {
+    loadUsers();
+    const name = localStorage.getItem("user");
+    const user = users.find(u => u.name === name);
 
+    if (!user) {
+      window.location.href = "login.html";
+      return;
+    }
+
+    document.getElementById("userName").innerText = user.name;
+    document.getElementById("points").innerText = user.points;
+
+    renderLeaderboard(); // Now it will find the canvas!
+    renderRewards(user);
+    renderHistory(user);
+  });
+}
 // --- FIXED GRAPH FUNCTION ---
 function renderLeaderboard() {
     const canvas = document.getElementById('leaderboardChart');
