@@ -3,44 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BHOOMIFY | Faculty</title>
+    <title>BHOOMIFY | Student</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body onload="initFaculty()">
+<body onload="initStudent()">
     <div class="app-container">
         <div class="navbar">
-            <div class="logo">👨‍🏫 Faculty Admin</div>
+            <div class="logo">🌱 BHOOMIFY</div>
             <button class="btn-main" onclick="logout()" style="width: auto; padding: 10px 20px; background: #f1f5f9; color: var(--dark);">Logout</button>
         </div>
 
-        <div class="grid-layout">
-            <div class="actions-side">
-                <details class="admin-card" open>
-                    <summary>🎯 Assign Green Credits</summary>
-                    <div class="content">
-                        <select id="studentSelect"></select>
-                        <input type="text" id="manualName" placeholder="Or type student name manually" style="margin-top: 10px;">
-                        <input type="number" id="pointsInput" placeholder="Amount of points (e.g. 50)">
-                        <button class="btn-main" onclick="assignPoints()">Update Credits</button>
-                    </div>
-                </details>
+        <div class="user-card">
+            <p style="text-transform: uppercase; letter-spacing: 2px; font-weight: 700; color: var(--text-muted); font-size: 0.8rem;">Current Balance</p>
+            <div class="points-display" id="points">0</div>
+            <p><span id="userName">User</span> • <span id="userLevel">Seed</span></p>
+        </div>
 
-                <details class="admin-card">
-                    <summary>👥 Manage Student Database</summary>
-                    <div class="content">
-                        <input type="text" id="newStudentName" placeholder="Full Name">
-                        <input type="password" id="newStudentPass" placeholder="Password">
-                        <button class="btn-main" onclick="addStudent()">Add Student</button>
-                        <div id="studentListAdmin" style="margin-top: 20px;"></div>
-                    </div>
-                </details>
+        <div class="grid-layout">
+            <div>
+                <div class="card">
+                    <h3>🎁 Claim Rewards</h3>
+                    <div id="rewardsSection" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;"></div>
+                </div>
+                
+                <div class="card">
+                    <h3>📜 History</h3>
+                    <div id="history"></div>
+                </div>
             </div>
 
-            <div class="display-side">
+            <div>
                 <div class="card">
-                    <h3>🏆 Live Leaderboard</h3>
+                    <h3>🏆 Leaderboard</h3>
                     <div id="leaderboardSection"></div>
                 </div>
+                <a href="BHOOMIFY.pdf" target="_blank" class="btn-main" style="text-decoration:none; background: #1e293b; text-align:center;">Project Report (PDF)</a>
             </div>
         </div>
     </div>
