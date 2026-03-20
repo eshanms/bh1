@@ -1,53 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8"><title>BHOOMIFY | Faculty Admin</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bhoomify | Faculty Admin</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body onload="initFaculty()">
     <nav class="navbar">
-        <div class="logo-box"><img src="logo.png" class="nav-logo"> <strong>FACULTY</strong></div>
-        <button class="btn-danger" style="width: auto; padding: 5px 15px;" onclick="logout()">Logout</button>
+        <div class="logo-box">
+            <img src="logo.png" class="nav-logo">
+            <strong style="letter-spacing: 1px;">FACULTY ADMIN</strong>
+        </div>
+        <div style="display: flex; align-items: center; gap: 20px;">
+            <span id="adminName" style="font-weight: 700; color: var(--primary);">Admin</span>
+            <button class="btn-danger" style="width: auto; margin-top: 0; padding: 8px 15px;" onclick="logout()">Logout</button>
+        </div>
     </nav>
 
-    <div style="display: grid; grid-template-columns: 350px 1fr; gap: 30px; padding: 30px; max-width: 1400px; margin: auto;">
+    <div style="display: grid; grid-template-columns: 380px 1fr; gap: 30px; padding: 30px; max-width: 1500px; margin: auto;">
         <aside>
             <div class="card animate">
-                <h3><i class="fas fa-user-plus"></i> Register Student</h3>
-                <input type="text" id="regName" placeholder="Name">
-                <input type="password" id="regPass" placeholder="Password">
-                <button class="btn-main" onclick="addStudent()">Add Student</button>
+                <h3><i class="fas fa-user-plus"></i> New Student</h3>
+                <input type="text" id="regName" placeholder="Full Name">
+                <input type="password" id="regPass" placeholder="Initial Password">
+                <button class="btn-main" onclick="addStudent()">Create Account</button>
             </div>
+
             <div class="card animate">
-                <h3><i class="fas fa-coins"></i> Point Management</h3>
+                <h3><i class="fas fa-edit"></i> Points Management</h3>
                 <select id="studentSelect"></select>
-                <input type="number" id="pointsInput" placeholder="Amount">
-                <button class="btn-main" onclick="assignPoints()">Update Points</button>
-                <button class="btn-danger" onclick="removeStudent()">Delete Account</button>
+                <input type="number" id="pointsInput" placeholder="Points Amount">
+                <button class="btn-main" onclick="assignPoints()">Update Balance</button>
+                <button class="btn-danger" onclick="removeStudent()">Delete Student Account</button>
             </div>
+
             <div class="card animate">
-                <h3><i class="fas fa-store"></i> Edit Reward Shop</h3>
+                <h3><i class="fas fa-store"></i> Reward Shop Editor</h3>
                 <input type="text" id="rewardName" placeholder="Item Name">
-                <input type="number" id="rewardCost" placeholder="Points">
-                <button class="btn-main" style="background: var(--secondary);" onclick="addReward()">Add to Shop</button>
+                <input type="number" id="rewardCost" placeholder="Price (Pts)">
+                <button class="btn-main" style="background: var(--secondary);" onclick="addReward()">Add to Catalog</button>
             </div>
         </aside>
 
         <main>
             <div class="card animate">
-                <h3>🏆 Campus Leaderboard</h3>
+                <h3><i class="fas fa-chart-bar"></i> Impact Leaderboard</h3>
                 <div id="leaderboardSection"></div>
             </div>
+
             <div class="card animate">
-                <h3>📜 System Audit Logs</h3>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                <h3><i class="fas fa-history"></i> System Logs</h3>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 25px;">
                     <div>
-                        <h4>Redemption History</h4>
-                        <div id="redeemLogBody" style="font-size: 0.9rem;"></div>
+                        <h4 style="border-left: 4px solid var(--primary); padding-left: 10px;">Redemption History</h4>
+                        <table class="log-table">
+                            <thead><tr><th>User</th><th>Item</th><th>Time</th></tr></thead>
+                            <tbody id="redeemLogBody"></tbody>
+                        </table>
                     </div>
                     <div>
-                        <h4>Login History</h4>
-                        <div id="loginBody" style="font-size: 0.9rem;"></div>
+                        <h4 style="border-left: 4px solid var(--secondary); padding-left: 10px;">Login Activity</h4>
+                        <table class="log-table">
+                            <thead><tr><th>User</th><th>Status</th><th>Time</th></tr></thead>
+                            <tbody id="loginBody"></tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -55,3 +73,4 @@
     </div>
     <script src="app.js"></script>
 </body>
+</html>
