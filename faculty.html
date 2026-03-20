@@ -7,43 +7,48 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body onload="initFaculty()">
-    <div class="app-container">
-        <div class="navbar">
-            <div class="logo">👨‍🏫 Faculty Admin</div>
-            <button class="btn-main" onclick="logout()" style="width: auto; padding: 10px 20px; background: #f1f5f9; color: var(--dark);">Logout</button>
-        </div>
+    <nav class="nav-container">
+        <img src="logo.png" alt="BHOOMIFY" class="site-logo">
+        <button class="btn-black" onclick="logout()" style="width: auto; padding: 10px 20px;">Logout</button>
+    </nav>
 
-        <div class="grid-layout">
-            <div class="actions-side">
-                <details class="admin-card" open>
-                    <summary>🎯 Assign Green Credits</summary>
-                    <div class="content">
-                        <select id="studentSelect"></select>
-                        <input type="text" id="manualName" placeholder="Or type student name manually" style="margin-top: 10px;">
-                        <input type="number" id="pointsInput" placeholder="Amount of points (e.g. 50)">
-                        <button class="btn-main" onclick="assignPoints()">Update Credits</button>
-                    </div>
-                </details>
+    <div class="editorial-grid">
+        <main>
+            <section class="panel">
+                <h3>Allocate Green Credits</h3>
+                <p style="margin-bottom: 25px; font-size: 0.9rem;">Assign credits for verified environmental campus actions.</p>
+                
+                <label style="font-size: 0.7rem; font-weight: 800; text-transform: uppercase;">Select Student</label>
+                <select id="studentSelect"></select>
+                
+                <label style="font-size: 0.7rem; font-weight: 800; text-transform: uppercase;">Manual Entry</label>
+                <input type="text" id="manualName" placeholder="Search by name...">
+                
+                <label style="font-size: 0.7rem; font-weight: 800; text-transform: uppercase;">Points to Add</label>
+                <input type="number" id="pointsInput" placeholder="Enter amount">
+                
+                <button class="btn-black" onclick="assignPoints()">Submit Allocation</button>
+            </section>
 
-                <details class="admin-card">
-                    <summary>👥 Manage Student Database</summary>
-                    <div class="content">
-                        <input type="text" id="newStudentName" placeholder="Full Name">
-                        <input type="password" id="newStudentPass" placeholder="Password">
-                        <button class="btn-main" onclick="addStudent()">Add Student</button>
-                        <div id="studentListAdmin" style="margin-top: 20px;"></div>
-                    </div>
-                </details>
-            </div>
-
-            <div class="display-side">
-                <div class="card">
-                    <h3>🏆 Live Leaderboard</h3>
-                    <div id="leaderboardSection"></div>
+            <section class="panel">
+                <h3>Directory Management</h3>
+                <div class="input-group">
+                    <input type="text" id="newStudentName" placeholder="Full Student Name">
+                    <input type="password" id="newStudentPass" placeholder="Temporary Password">
+                    <button class="btn-black" onclick="addStudent()">Create Profile</button>
                 </div>
+                <div id="studentListAdmin" style="margin-top: 30px;"></div>
+            </section>
+        </main>
+
+        <aside>
+            <div class="panel">
+                <h3 style="margin-bottom: 20px;">Current Standings</h3>
+                <div id="leaderboardSection"></div>
             </div>
-        </div>
+        </aside>
     </div>
+
     <script src="app.js"></script>
 </body>
 </html>
