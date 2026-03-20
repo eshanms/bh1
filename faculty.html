@@ -2,65 +2,66 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>BHOOMIFY | Faculty Admin</title>
+    <title>BHOOMIFY | Faculty Portal</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body onload="initFaculty()">
 
-<body>
-    <nav class="navbar">
-        <div class="logo-container">
-            <img src="logo.png" alt="Bhoomify" class="nav-logo">
-            <span class="logo-text">Faculty Admin</span>
-        </div>
-        <button class="logout-btn-dark" onclick="logout()">Logout</button>
-    </nav>
-
-    <div class="app-container">
-        ```
+<div class="navbar">
+    <div class="logo-container">
+        <img src="logo.png" alt="Bhoomify" class="nav-logo">
+        <span class="logo-text">Faculty Admin</span>
+    </div>
+    <div class="admin-meta">
+        <span id="adminName">Loading...</span>
+        <button class="logout-btn" onclick="logout()">Logout</button>
+    </div>
+</div>
 
 <div class="app-container">
+    
     <div class="card admin-card">
-        <h3>🎯 Authorize Green Credits</h3>
+        <h3>🌱 Green Credit Authorization</h3>
+        <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 20px;">Authorize points or delete eco-accounts.</p>
+        
+        <label>Student Selector</label>
         <select id="studentSelect"></select>
-        <input type="text" id="manualName" placeholder="Or type student name manually">
-        <input type="number" id="pointsInput" placeholder="Points amount">
-        <button onclick="assignPoints()">Update Credits</button>
-    </div>
-<div class="card admin-card">
-    <h3>🌱 Register New Student</h3>
-    <p style="color: var(--text-muted); font-size: 0.85rem;">Create a new eco-account for campus members.</p>
-    <input type="text" id="regName" placeholder="Full Name">
-    <input type="password" id="regPass" placeholder="Set Password">
-    <button class="btn-main" onclick="addStudent()">Add Student to System</button>
-</div>
-    <div class="card admin-card">
-        <h3>🎁 Manage Rewards Catalog</h3>
-        <div style="display:flex; gap:10px;">
-            <input type="text" id="rewardName" placeholder="Reward Name">
-            <input type="number" id="rewardCost" placeholder="Points Cost">
-            <input type="text" id="rewardIcon" placeholder="Emoji" style="width:80px;">
+        <p style="text-align:center; color:#ccc; margin:5px 0;">-- OR --</p>
+        <input type="text" id="manualName" placeholder="Search by name">
+        
+        <label>Credits to Authorize</label>
+        <input type="number" id="pointsInput" placeholder="Amount (e.g., 50)">
+        
+        <div style="display:grid; grid-template-columns: 2fr 1fr; gap:10px; margin-top: 15px;">
+            <button class="btn-main" onclick="assignPoints()">Update Credits</button>
+            <button class="btn-delete" onclick="removeStudent()" title="Permenantly delete account">Remove User</button>
         </div>
-        <button onclick="addReward()">+ Add Reward to Shop</button>
-        <div id="rewardsListAdmin" style="margin-top:15px;"></div>
     </div>
 
     <div class="card">
-        <h3>📜 System Audit Logs</h3>
-        <div class="tabs">
-            <button class="btn-tab active" id="tabLogin" onclick="showLog('login')">Login History</button>
-            <button class="btn-tab" id="tabRedeem" onclick="showLog('redeem')">Reward Redemptions</button>
-        </div>
-        <table class="log-table">
-            <thead><tr id="tableHead"><th>User</th><th>Action</th><th>Timestamp</th></tr></thead>
-            <tbody id="logBody"></tbody>
-        </table>
+        <h3>📜 System Audit Trails</h3>
+        
+        <details class="log-details" open>
+            <summary>Login Access History <span>▼</span></summary>
+            <div class="details-content">
+                <table class="log-table">
+                    <thead><tr><th>User</th><th>Activity</th><th>Date</th></tr></thead>
+                    <tbody id="loginBody"></tbody>
+                </table>
+            </div>
+        </details>
+
+        <details class="log-details">
+            <summary>Reward Redemption Log <span>▼</span></summary>
+            <div class="details-content">
+                <table class="log-table">
+                    <thead><tr><th>Student</th><th>Activity</th><th>Date</th></tr></thead>
+                    <tbody id="redeemLogBody"></tbody>
+                </table>
+            </div>
+        </details>
     </div>
 
-    <div class="card">
-        <h3>🏆 Top Performing Students</h3>
-        <div id="leaderboardSection" class="leaderboard-container"></div>
-    </div>
 </div>
 
 <script src="app.js"></script>
