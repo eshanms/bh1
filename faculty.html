@@ -6,57 +6,52 @@
 </head>
 <body onload="initFaculty()">
     <nav class="navbar">
-        <div style="display: flex; align-items: center; gap: 10px;">
-            <img src="logo.png" class="nav-logo">
-            <strong style="letter-spacing: 1px;">FACULTY PORTAL</strong>
-        </div>
-        <div>
-            <span id="adminName" style="margin-right: 15px; font-weight: 600;">Admin</span>
-            <button class="btn-outline" onclick="logout()" style="padding: 8px 15px; cursor: pointer;">Logout</button>
-        </div>
+        <div class="logo-box"><img src="logo.png" class="nav-logo"> <strong>FACULTY</strong></div>
+        <button class="btn-danger" style="width: auto; padding: 5px 15px;" onclick="logout()">Logout</button>
     </nav>
 
-  <div class="container faculty-grid">
-    <div style="display: grid; grid-template-columns: 1fr 1.5fr; gap: 30px;">
+    <div style="display: grid; grid-template-columns: 350px 1fr; gap: 30px; padding: 30px; max-width: 1400px; margin: auto;">
         <aside>
             <div class="card animate">
-                <h3>👥 Manage Students</h3>
-                <input type="text" id="newStudentName" placeholder="New Name">
-                <input type="password" id="newStudentPass" placeholder="Password">
-                <button onclick="addStudent()" class="btn-main">Create Student</button>
-                <hr style="margin:20px 0; opacity:0.1;">
-                <select id="studentSelect"></select>
-                <input type="number" id="pointsUpdate" placeholder="Points to add/subtract">
-                <button onclick="updatePoints()" class="btn-main">Update Credits</button>
-                <button onclick="deleteStudent()" style="background:#fff1f2; color:#ef4444; border:none; width:100%; padding:10px; margin-top:10px; border-radius:8px; cursor:pointer;">Remove Student</button>
+                <h3><i class="fas fa-user-plus"></i> Register Student</h3>
+                <input type="text" id="regName" placeholder="Name">
+                <input type="password" id="regPass" placeholder="Password">
+                <button class="btn-main" onclick="addStudent()">Add Student</button>
             </div>
-
-            <div class="card animate" style="margin-top:20px;">
-                <h3>🛒 Edit Reward Shop</h3>
-                <input type="text" id="shopItemName" placeholder="Item Name">
-                <input type="number" id="shopItemCost" placeholder="Cost">
-                <button onclick="addRewardItem()" class="btn-main" style="background:var(--secondary);">Add Item</button>
+            <div class="card animate">
+                <h3><i class="fas fa-coins"></i> Point Management</h3>
+                <select id="studentSelect"></select>
+                <input type="number" id="pointsInput" placeholder="Amount">
+                <button class="btn-main" onclick="assignPoints()">Update Points</button>
+                <button class="btn-danger" onclick="removeStudent()">Delete Account</button>
+            </div>
+            <div class="card animate">
+                <h3><i class="fas fa-store"></i> Edit Reward Shop</h3>
+                <input type="text" id="rewardName" placeholder="Item Name">
+                <input type="number" id="rewardCost" placeholder="Points">
+                <button class="btn-main" style="background: var(--secondary);" onclick="addReward()">Add to Shop</button>
             </div>
         </aside>
 
         <main>
             <div class="card animate">
-                <h3>🏆 Real-time Leaderboard</h3>
-                
-                <div id="leaderboardDisplay"></div>
+                <h3>🏆 Campus Leaderboard</h3>
+                <div id="leaderboardSection"></div>
             </div>
-
-            <div class="card animate" style="margin-top:20px;">
-                <h3>📜 System Logs</h3>
-                <div style="display:flex; gap:10px; margin-bottom:15px;">
-                    <button onclick="renderLogs('login')" class="btn-outline">Login History</button>
-                    <button onclick="renderLogs('redeem')" class="btn-outline">Redemptions</button>
+            <div class="card animate">
+                <h3>📜 System Audit Logs</h3>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                    <div>
+                        <h4>Redemption History</h4>
+                        <div id="redeemLogBody" style="font-size: 0.9rem;"></div>
+                    </div>
+                    <div>
+                        <h4>Login History</h4>
+                        <div id="loginBody" style="font-size: 0.9rem;"></div>
+                    </div>
                 </div>
-                <div id="logTableWrapper" style="max-height: 300px; overflow-y: auto;"></div>
             </div>
         </main>
     </div>
-</div>
-    <script src.js"></script>
+    <script src="app.js"></script>
 </body>
-</html>
