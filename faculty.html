@@ -1,59 +1,50 @@
- 
-
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BHOOMIFY | Faculty Admin</title>
+    <title>BHOOMIFY | Faculty</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body onload="initFaculty()">
-    <nav class="nav-container">
-        <img src="logo.png" alt="BHOOMIFY Logo" class="site-logo">
-        <button class="btn-black" onclick="logout()" style="width:auto; padding: 10px 20px;">Sign Out</button>
-    </nav>
+    <div class="app-container">
+        <div class="navbar">
+            <div class="logo">👨‍🏫 Faculty Admin</div>
+            <button class="btn-main" onclick="logout()" style="width: auto; padding: 10px 20px; background: #f1f5f9; color: var(--dark);">Logout</button>
+        </div>
 
-    <div class="editorial-grid">
-        <main>
-            <section class="panel">
-                <h3>Credit Allocation</h3>
-                <p style="margin-bottom: 30px;">Select a student or type a name manually to issue green credits.</p>
-                
-                <label style="font-size: 0.7rem; font-weight: 800; text-transform: uppercase; color: var(--text-heading);">Quick Select</label>
-                <select id="studentSelect"></select>
-                
-                <label style="font-size: 0.7rem; font-weight: 800; text-transform: uppercase; color: var(--text-heading);">Manual Search</label>
-                <input type="text" id="manualName" placeholder="Enter student name">
-                
-                <label style="font-size: 0.7rem; font-weight: 800; text-transform: uppercase; color: var(--text-heading);">Credits to Issue</label>
-                <input type="number" id="pointsInput" placeholder="Amount">
-                
-                <button class="btn-black" onclick="assignPoints()">Authorize Credits</button>
-            </section>
-
-            <section class="panel">
-                <h3>User Management</h3>
-                <details>
-                    <summary>Add New Profile <span>+</span></summary>
-                    <div style="padding-top:20px;">
-                        <input type="text" id="newStudentName" placeholder="Student Full Name">
-                        <input type="password" id="newStudentPass" placeholder="Assign Password">
-                        <button class="btn-black" onclick="addStudent()">Register Profile</button>
+        <div class="grid-layout">
+            <div class="actions-side">
+                <details class="admin-card" open>
+                    <summary>🎯 Assign Green Credits</summary>
+                    <div class="content">
+                        <select id="studentSelect"></select>
+                        <input type="text" id="manualName" placeholder="Or type student name manually" style="margin-top: 10px;">
+                        <input type="number" id="pointsInput" placeholder="Amount of points (e.g. 50)">
+                        <button class="btn-main" onclick="assignPoints()">Update Credits</button>
                     </div>
                 </details>
-                <div id="studentListAdmin" style="margin-top: 20px;"></div>
-            </section>
-        </main>
 
-        <aside>
-            <div class="panel">
-                <h3>Leaderboard</h3>
-                <div id="leaderboardSection"></div>
+                <details class="admin-card">
+                    <summary>👥 Manage Student Database</summary>
+                    <div class="content">
+                        <input type="text" id="newStudentName" placeholder="Full Name">
+                        <input type="password" id="newStudentPass" placeholder="Password">
+                        <button class="btn-main" onclick="addStudent()">Add Student</button>
+                        <div id="studentListAdmin" style="margin-top: 20px;"></div>
+                    </div>
+                </details>
             </div>
-        </aside>
-    </div>
 
+            <div class="display-side">
+                <div class="card">
+                    <h3>🏆 Live Leaderboard</h3>
+                    <div id="leaderboardSection"></div>
+                </div>
+            </div>
+        </div>
+    </div>
     <script src="app.js"></script>
 </body>
-</html>
+</html> 
+
