@@ -121,3 +121,17 @@ body {
     padding: 10px 0; border-bottom: 1px solid #eee; font-size: 0.85rem;
 }
 .history-date { color: #888; }
+.download-btn {
+    display: block;
+    text-align: center;
+    background: #34495e;
+    color: white;
+    padding: 10px;
+    text-decoration: none;
+    border-radius: 8px;
+    margin-top: 10px;
+    font-weight: bold;
+}
+.download-btn:hover {
+    background: #2c3e50;
+}
