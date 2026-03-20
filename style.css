@@ -36,7 +36,56 @@ select {
     border-radius: 8px;
     border: 1px solid #ddd;
 }
-   
+
+
+
+/* Faculty Specific Styles */
+.admin-menu { padding: 15px; }
+
+.admin-card {
+    background: white;
+    margin-bottom: 10px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+.admin-card summary {
+    padding: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    background: #fff;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    transition: background 0.3s;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.admin-card summary:hover { background: #f9f9f9; }
+
+.admin-card .content {
+    padding: 20px;
+    background: #fafafa;
+}
+
+.list-container {
+    margin-top: 15px;
+    max-height: 250px;
+    overflow-y: auto;
+    border-top: 1px solid #ddd;
+}
+
+.input-group { display: flex; flex-direction: column; gap: 8px; }
+
+select {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+    background: white;
+}   
 
 
     
