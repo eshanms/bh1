@@ -1,4 +1,4 @@
-// --- DATA INITIALIZATION ---
+// --- 1. DATA INITIALIZATION ---
 let users = JSON.parse(localStorage.getItem("users")) || [
     { name: "Eshan", password: "123", role: "student", points: 120, history: [] },
     { name: "Aneya", password: "123", role: "student", points: 180, history: [] },
@@ -7,7 +7,8 @@ let users = JSON.parse(localStorage.getItem("users")) || [
 
 let rewardsList = JSON.parse(localStorage.getItem("rewards")) || [
     { name: "Eco Badge", cost: 50, icon: "🏅" },
-    { name: "Tree Sapling", cost: 150, icon: "🌱" }
+    { name: "Tree Sapling", cost: 150, icon: "🌱" },
+    { name: "Cafe Coupon", cost: 100, icon: "☕" }
 ];
 
 let loginLogs = JSON.parse(localStorage.getItem("loginLogs")) || [];
@@ -20,7 +21,7 @@ function saveAll() {
     localStorage.setItem("redeemLogs", JSON.stringify(redeemLogs));
 }
 
-// --- LOGIN LOGIC ---
+// --- 2. LOGIN SYSTEM ---
 function login() {
     const nameInput = document.getElementById("username").value.trim();
     const passInput = document.getElementById("password").value;
@@ -30,22 +31,88 @@ function login() {
         localStorage.setItem("user", user.name);
         localStorage.setItem("role", user.role);
         
-        // Log the login
         loginLogs.unshift({ user: user.name, action: "Logged In", time: new Date().toLocaleString() });
         saveAll();
-
+        
         window.location.href = (user.role === "student") ? "student.html" : "faculty.html";
     } else {
-        alert("Invalid Login!");
+        alert("Invalid Username or Password!");
     }
 }
 
-// --- FACULTY FUNCTIONS ---
+// --- 3. UNIVERSAL LEADERBOARD ---
+function renderLeaderboard() {
+    const section = document.getElementById("leaderboardSection");
+    if (!section) return;
+
+    const students = users.filter(u => u.role === "student").sort((a, b) => b.points - a.points);
+    const max = Math.max(...students.map(s => s.points), 1);
+
+    section.innerHTML = students.map((s, i) => `
+        <div class="leader-row">
+            <div class="rank">${i + 1}</div>
+            <div style="flex:1">
+                <div style="display:flex; justify-content:space-between; font-weight:600;">
+                    <span>${s.name}</span><span>${s.points} Pts</span>
+                </div>
+                <div class="progress-bar"><div class="progress-fill" style="width:${(s.points / max) * 100}%"></div></div>
+            </div>
+        </div>
+    `).join("");
+}
+
+// --- 4. STUDENT DASHBOARD ---
+function initStudent() {
+    const currentUserName = localStorage.getItem("user");
+    const user = users.find(u => u.name === currentUserName);
+    if (!user) { window.location.href = "index.html"; return; }
+
+    document.getElementById("userName").innerText = user.name;
+    document.getElementById("points").innerText = user.points;
+    
+    renderLeaderboard();
+    renderRewards(user.points);
+    renderHistory(user);
+}
+
+function renderRewards(userPoints) {
+    const res = document.getElementById("rewardsSection");
+    if (!res) return;
+    res.innerHTML = rewardsList.map(r => `
+        <div class="reward-item" style="border:1px solid #eee; padding:15px; border-radius:12px; text-align:center;">
+            <div style="font-size:2rem">${r.icon}</div>
+            <strong>${r.name}</strong><br><small>${r.cost} Pts</small><br>
+            <button class="btn-main" onclick="redeem('${r.name}', ${r.cost})" ${userPoints < r.cost ? 'disabled style="background:#ccc; cursor:not-allowed;"' : ''}>Claim</button>
+        </div>
+    `).join("");
+}
+
+function redeem(name, cost) {
+    const user = users.find(u => u.name === localStorage.getItem("user"));
+    if (user.points >= cost) {
+        user.points -= cost;
+        user.history.unshift({ action: `Redeemed ${name}`, date: new Date().toLocaleDateString() });
+        redeemLogs.unshift({ user: user.name, item: name, time: new Date().toLocaleString() });
+        saveAll();
+        location.reload();
+    }
+}
+
+function renderHistory(user) {
+    const hist = document.getElementById("history");
+    if (hist) hist.innerHTML = user.history.map(h => `
+        <div style="display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid #eee;">
+            <span>${h.action}</span><small color="#666">${h.date}</small>
+        </div>
+    `).join("");
+}
+
+// --- 5. FACULTY DASHBOARD ---
 function initFaculty() {
     if (localStorage.getItem("role") !== "faculty") { window.location.href = "index.html"; return; }
-    updateStudentSelect();
     renderRewardsAdmin();
     renderLeaderboard();
+    updateStudentSelect();
     showLog('login');
 }
 
@@ -58,40 +125,11 @@ function updateStudentSelect() {
     });
 }
 
-// Reward Editing
-function addReward() {
-    const name = document.getElementById("rewardName").value;
-    const cost = parseInt(document.getElementById("rewardCost").value);
-    const icon = document.getElementById("rewardIcon").value || "🎁";
-    if (name && cost) {
-        rewardsList.push({ name, cost, icon });
-        saveAll();
-        renderRewardsAdmin();
-    }
-}
-
-function renderRewardsAdmin() {
-    const container = document.getElementById("rewardsListAdmin");
-    if (!container) return;
-    container.innerHTML = rewardsList.map((r, i) => `
-        <div class="reward-edit-item">
-            <span>${r.icon} <strong>${r.name}</strong> (${r.cost} Pts)</span>
-            <button class="del-btn" onclick="removeReward(${i})">Delete</button>
-        </div>
-    `).join("");
-}
-
-function removeReward(index) {
-    rewardsList.splice(index, 1);
-    saveAll();
-    renderRewardsAdmin();
-}
-
-// Logs Logic
 function showLog(type) {
     const body = document.getElementById("logBody");
     const tabL = document.getElementById("tabLogin");
     const tabR = document.getElementById("tabRedeem");
+    if(!body) return;
 
     body.innerHTML = "";
     if (type === 'login') {
@@ -107,61 +145,39 @@ function showLog(type) {
     }
 }
 
-// --- SHARED LEADERBOARD ---
-function renderLeaderboard() {
-    const section = document.getElementById("leaderboardSection");
-    if (!section) return;
-    const students = users.filter(u => u.role === "student").sort((a,b) => b.points - a.points);
-    const max = Math.max(...students.map(s => s.points), 1);
-
-    section.innerHTML = students.map((s, i) => `
-        <div class="leader-row">
-            <div class="rank-medal">${i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : (i + 1)}</div>
-            <div class="user-info">
-                <div class="name-pts"><span>${s.name}</span><span>${s.points} Pts</span></div>
-                <div class="progress-bg"><div class="progress-fill" style="width:${(s.points/max)*100}%"></div></div>
-            </div>
-        </div>
-    `).join("");
-}
-
-// --- STUDENT ACTIONS ---
-function initStudent() {
-    const name = localStorage.getItem("user");
-    const u = users.find(user => user.name === name);
-    if (!u) { window.location.href = "index.html"; return; }
-    document.getElementById("userName").innerText = u.name;
-    document.getElementById("points").innerText = u.points;
-    renderLeaderboard();
-    renderRewards(u.points);
-}
-
-function redeem(name, cost) {
-    const u = users.find(user => user.name === localStorage.getItem("user"));
-    if (u.points >= cost) {
-        u.points -= cost;
-        u.history.unshift({ action: `Redeemed ${name}`, date: new Date().toLocaleDateString() });
-        
-        // Add to global logs for Faculty
-        redeemLogs.unshift({ user: u.name, item: name, time: new Date().toLocaleString() });
-        
+function addReward() {
+    const name = document.getElementById("rewardName").value;
+    const cost = parseInt(document.getElementById("rewardCost").value);
+    const icon = document.getElementById("rewardIcon").value || "🎁";
+    if (name && cost) {
+        rewardsList.push({ name, cost, icon });
         saveAll();
         location.reload();
     }
 }
 
+function renderRewardsAdmin() {
+    const container = document.getElementById("rewardsListAdmin");
+    if (container) container.innerHTML = rewardsList.map((r, i) => `
+        <div style="display:flex; justify-content:space-between; padding:10px; border-bottom:1px solid #eee;">
+            <span>${r.icon} ${r.name} (${r.cost} pts)</span>
+            <button onclick="rewardsList.splice(${i},1); saveAll(); location.reload();" style="background:red; color:white; border:none; border-radius:4px; cursor:pointer;">X</button>
+        </div>`).join("");
+}
+
 function assignPoints() {
-    const target = document.getElementById("manualName").value.trim() || document.getElementById("studentSelect").value;
+    const selectName = document.getElementById("studentSelect").value;
+    const manualName = document.getElementById("manualName").value.trim();
     const pts = parseInt(document.getElementById("pointsInput").value);
-    const student = users.find(u => u.name.toLowerCase() === target.toLowerCase());
+    const finalName = manualName || selectName;
+    const student = users.find(u => u.name.toLowerCase() === finalName.toLowerCase());
 
     if (student && !isNaN(pts)) {
         student.points += pts;
-        student.history.unshift({ action: `Received ${pts} Pts`, date: new Date().toLocaleDateString() });
+        student.history.unshift({ action: `Earned ${pts} Pts`, date: new Date().toLocaleDateString() });
         saveAll();
-        alert("Credits added successfully!");
         location.reload();
-    } else { alert("User not found!"); }
+    } else { alert("Error updating points."); }
 }
 
 function logout() { localStorage.clear(); window.location.href = "index.html"; }
