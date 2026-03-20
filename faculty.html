@@ -1,20 +1,57 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Faculty Dashboard</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BHOOMIFY | Faculty Admin</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body>
-<div class="container">
-    <div class="header">👨‍🏫 Faculty Control</div>
+<body onload="initFaculty()">
+
+<div class="app-container">
+    <nav class="navbar">
+        <div class="logo">👨‍🏫 Faculty Admin</div>
+        <button class="logout-btn" onclick="logout()">Logout</button>
+    </nav>
+
     <div class="card">
-      <h3>Assign Green Credits</h3>
-      <input type="text" id="studentName" placeholder="Student Name">
-      <input type="number" id="pointsInput" placeholder="Points (e.g. 50)">
-      <button onclick="assignPoints()">Update Student Points</button>
+        <h3>👥 Student Management</h3>
+        <div class="admin-actions">
+            <input type="text" id="newStudentName" placeholder="New Student Name">
+            <input type="password" id="newStudentPass" placeholder="Set Password">
+            <button onclick="addStudent()">+ Add New Student</button>
+        </div>
+        <hr>
+        <div id="studentListAdmin">
+            </div>
     </div>
-    <button onclick="logout()" style="background:#666;">Logout</button>
+
+    <div class="card">
+        <h3>🎯 Assign Points</h3>
+        <select id="studentSelect">
+            <option value="">Select a Student</option>
+        </select>
+        <input type="number" id="pointsInput" placeholder="Points amount">
+        <button onclick="assignPoints()">Update Points</button>
+    </div>
+
+    <div class="card">
+        <h3>🎁 Manage Rewards</h3>
+        <div class="admin-actions">
+            <input type="text" id="rewardName" placeholder="Reward Name">
+            <input type="number" id="rewardCost" placeholder="Point Cost">
+            <input type="text" id="rewardIcon" placeholder="Icon (e.g. 🌳)">
+            <button onclick="addReward()" id="rewardActionBtn">Add Reward</button>
+        </div>
+        <div id="rewardsListAdmin" style="margin-top:15px;"></div>
+    </div>
+
+    <div class="card">
+        <h3>📊 Current Leaderboard</h3>
+        <div id="leaderboardSection"></div>
+    </div>
 </div>
+
 <script src="app.js"></script>
 </body>
 </html>
