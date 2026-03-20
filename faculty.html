@@ -27,24 +27,25 @@
                 <button class="btn-delete" onclick="removeStudent()" style="width:100%; margin-top:10px">Remove User</button>
             </div>
             <div class="app-container">
-    <div class="card">
-        <h3>🎯 Authorize Green Credits</h3>
-        <select id="studentSelect" class="input-field">
-            <option>-- Select Student --</option>
-        </select>
-        <input type="number" id="pointAmount" placeholder="Points (e.g. 50)" class="input-field">
-        <button class="btn-main" onclick="updateCredits()">Update Credits</button>
-    </div>
-
-    <div class="card">
-        <h3>🛒 Manage Rewards Shop</h3>
-        <div style="display: flex; gap: 10px; margin-bottom: 15px;">
-            <input type="text" id="rewardName" placeholder="Reward Name" class="input-field">
-            <input type="number" id="rewardCost" placeholder="Cost" class="input-field">
-            <button class="btn-main" onclick="addReward()">Add to Shop</button>
+   <div class="container">
+    <div class="grid-2">
+        <div class="card">
+            <h3>🎯 Authorize Green Credits</h3>
+            <select id="studentSelect" style="width: 100%; padding: 12px; margin-bottom: 15px; border-radius: 8px; border: 1px solid #ddd;">
+                <option value="">-- Select Student --</option>
+            </select>
+            <input type="number" id="pointAmount" placeholder="Points (e.g., 50)" style="width: 100%; padding: 12px; margin-bottom: 15px; border-radius: 8px; border: 1px solid #ddd;">
+            <button class="btn-primary" style="width: 100%;" onclick="updateCredits()">Update Credits</button>
         </div>
-        <div id="activeRewardsList">
-            </div>
+
+        <div class="card">
+            <h3>🛒 Reward Shop Editor</h3>
+            <input type="text" id="newRewardName" placeholder="Reward Name" style="width: 100%; padding: 10px; margin-bottom: 10px;">
+            <input type="number" id="newRewardCost" placeholder="Cost" style="width: 100%; padding: 10px; margin-bottom: 10px;">
+            <button class="btn-primary" style="width: 100%; background: #1e293b;" onclick="addNewReward()">Add to Shop</button>
+            <hr style="margin: 20px 0; border: 0; border-top: 1px solid #eee;">
+            <div id="activeRewardsList"></div>
+        </div>
     </div>
 </div>
             <div class="card">
