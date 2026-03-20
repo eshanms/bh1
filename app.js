@@ -173,3 +173,59 @@ function addReward() {
     // Logic to push to a 'rewards' array in localStorage
     alert("Reward added to Student Shop!");
 }
+// Add these functions or update existing ones in app.js
+
+function renderLeaderboard() {
+    const section = document.getElementById("leaderboardSection");
+    if (!section) return;
+
+    const students = users.filter(u => u.role === "student").sort((a, b) => b.points - a.points);
+    // Find highest points to set bar percentage
+    const maxPoints = students.length > 0 ? Math.max(...students.map(s => s.points), 1) : 1;
+
+    section.innerHTML = students.map((s, i) => {
+        const percentage = (s.points / maxPoints) * 100;
+        return `
+            <div class="leader-row">
+                <div class="leader-info">
+                    <span>${i + 1}. ${s.name}</span>
+                    <span>${s.points} Pts</span>
+                </div>
+                <div class="bar-container">
+                    <div class="bar-fill" style="width: ${percentage}%"></div>
+                </div>
+            </div>
+        `;
+    }).join("");
+}
+
+// Fixed addReward function
+function addReward() {
+    const name = document.getElementById("rewardName").value;
+    const cost = parseInt(document.getElementById("rewardCost").value);
+    if (name && cost) {
+        rewardsList.push({ name, cost, icon: "🎁" });
+        saveAll();
+        alert("Reward Added!");
+        location.reload();
+    }
+}
+
+// Logic to handle log switching
+function showLog(type) {
+    const body = document.getElementById("logBody");
+    const header = document.getElementById("logHeader");
+    body.innerHTML = "";
+    
+    if (type === 'login') {
+        header.innerHTML = "<th>User</th><th>Action</th><th>Time</th>";
+        loginLogs.forEach(l => {
+            body.innerHTML += `<tr><td>${l.user}</td><td>${l.action}</td><td>${l.time}</td></tr>`;
+        });
+    } else {
+        header.innerHTML = "<th>User</th><th>Item</th><th>Time</th>";
+        redeemLogs.forEach(l => {
+            body.innerHTML += `<tr><td>${l.user}</td><td>${l.item}</td><td>${l.time}</td></tr>`;
+        });
+    }
+}
