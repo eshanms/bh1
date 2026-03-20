@@ -10,48 +10,58 @@
 
 <div class="app-container">
     <nav class="navbar">
-        <div class="logo">👨‍🏫 Faculty Admin</div>
+        <div class="logo">👨‍🏫 Faculty Control Panel</div>
         <button class="logout-btn" onclick="logout()">Logout</button>
     </nav>
 
-    <div class="card">
-        <h3>👥 Student Management</h3>
-        <div class="admin-actions">
-            <input type="text" id="newStudentName" placeholder="New Student Name">
-            <input type="password" id="newStudentPass" placeholder="Set Password">
-            <button onclick="addStudent()">+ Add New Student</button>
-        </div>
-        <hr>
-        <div id="studentListAdmin">
+    <div class="admin-menu">
+        
+        <details class="admin-card">
+            <summary>👥 Manage Students & Personas</summary>
+            <div class="content">
+                <div class="input-group">
+                    <input type="text" id="newStudentName" placeholder="New Student Name">
+                    <input type="password" id="newStudentPass" placeholder="Set Password">
+                    <button onclick="addStudent()">+ Create Student</button>
+                </div>
+                <div id="studentListAdmin" class="list-container"></div>
             </div>
-    </div>
+        </details>
 
-    <div class="card">
-        <h3>🎯 Assign Points</h3>
-        <select id="studentSelect">
-            <option value="">Select a Student</option>
-        </select>
-        <input type="number" id="pointsInput" placeholder="Points amount">
-        <button onclick="assignPoints()">Update Points</button>
-    </div>
+        <details class="admin-card">
+            <summary>🎯 Assign Green Credits</summary>
+            <div class="content">
+                <select id="studentSelect"><option value="">Select Student</option></select>
+                <input type="number" id="pointsInput" placeholder="Amount of Points">
+                <button onclick="assignPoints()">Update Points</button>
+            </div>
+        </details>
 
-    <div class="card">
-        <h3>🎁 Manage Rewards</h3>
-        <div class="admin-actions">
-            <input type="text" id="rewardName" placeholder="Reward Name">
-            <input type="number" id="rewardCost" placeholder="Point Cost">
-            <input type="text" id="rewardIcon" placeholder="Icon (e.g. 🌳)">
-            <button onclick="addReward()" id="rewardActionBtn">Add Reward</button>
-        </div>
-        <div id="rewardsListAdmin" style="margin-top:15px;"></div>
-    </div>
+        <details class="admin-card">
+            <summary>🎁 Manage Rewards Inventory</summary>
+            <div class="content">
+                <div class="input-group">
+                    <input type="text" id="rewardName" placeholder="Reward Title">
+                    <input type="number" id="rewardCost" placeholder="Point Cost">
+                    <input type="text" id="rewardIcon" placeholder="Icon (e.g. 🌲)">
+                    <button onclick="addReward()" id="rewardActionBtn">Add Reward</button>
+                </div>
+                <div id="rewardsListAdmin" class="list-container"></div>
+            </div>
+        </details>
 
-    <div class="card">
-        <h3>📊 Current Leaderboard</h3>
-        <div id="leaderboardSection"></div>
+        <details class="admin-card" open>
+            <summary>📊 Live Leaderboard View</summary>
+            <div class="content">
+                <div id="leaderboardSection">
+                    </div>
+            </div>
+        </details>
+
     </div>
 </div>
 
 <script src="app.js"></script>
 </body>
 </html>
+            
