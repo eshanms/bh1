@@ -7,6 +7,7 @@
     --white: #ffffff;
     --danger: #f43f5e;
     --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    --radius: 12px;
 }
 
 * { box-sizing: border-box; font-family: 'Inter', sans-serif; transition: all 0.3s ease; }
@@ -22,8 +23,9 @@ body { background: var(--bg); margin: 0; color: var(--secondary); overflow-x: hi
     padding: 1rem 5%; background: var(--white); box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
 .nav-logo { height: 45px; }
+.logo-box { display: flex; align-items: center; gap: 12px; }
 
-/* Dashboard Cards */
+/* Cards */
 .card {
     background: var(--white); border-radius: 16px; padding: 25px;
     box-shadow: var(--shadow); border: 1px solid #e2e8f0; margin-bottom: 20px;
@@ -34,7 +36,7 @@ body { background: var(--bg); margin: 0; color: var(--secondary); overflow-x: hi
 .bar-container { background: #e2e8f0; height: 12px; border-radius: 10px; overflow: hidden; margin-top: 5px; }
 .bar-fill { 
     background: linear-gradient(90deg, var(--primary), var(--accent)); 
-    height: 100%; border-radius: 10px; width: 0; /* Animated via JS */
+    height: 100%; border-radius: 10px; width: 0; transition: width 1s ease-in-out;
 }
 
 /* Inputs & Buttons */
@@ -50,4 +52,9 @@ input:focus { border-color: var(--primary); outline: none; box-shadow: 0 0 0 3px
 }
 .btn-main:hover { background: var(--primary-dark); transform: scale(1.02); }
 
-.btn-danger { background: #fff1f2; color: var(--danger); border: 1px solid #fecdd3; padding: 10px; border-radius: 8px; cursor: pointer; width: 100%; margin-top: 5px; }
+.btn-danger { background: #fff1f2; color: var(--danger); border: 1px solid #fecdd3; padding: 10px; border-radius: 10px; cursor: pointer; width: 100%; margin-top: 5px; }
+
+/* Tables */
+.log-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+.log-table th { text-align: left; padding: 12px; border-bottom: 2px solid #e2e8f0; color: #64748b; font-size: 0.85rem; }
+.log-table td { padding: 12px; border-bottom: 1px solid #e2e8f0; font-size: 0.85rem; }
