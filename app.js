@@ -1,6 +1,57 @@
 // --- 1. DATA INITIALIZATION ---
 let users = JSON.parse(localStorage.getItem("users"));
+// Data stays safe in LocalStorage
+let users = JSON.parse(localStorage.getItem("users")) || [
+    { name: "Faculty1", password: "admin", role: "faculty" }
+];
+let rewardsList = JSON.parse(localStorage.getItem("rewards")) || [
+    { name: "Eco Badge", cost: 50, icon: "🏅" }
+];
+let loginLogs = JSON.parse(localStorage.getItem("loginLogs")) || [];
+let redeemLogs = JSON.parse(localStorage.getItem("redeemLogs")) || [];
 
+function saveAll() {
+    localStorage.setItem("users", JSON.stringify(users));
+    localStorage.setItem("rewards", JSON.stringify(rewardsList));
+    localStorage.setItem("loginLogs", JSON.stringify(loginLogs));
+    localStorage.setItem("redeemLogs", JSON.stringify(redeemLogs));
+}
+
+// Attractive Leaderboard with Bars
+function renderLeaderboard() {
+    const section = document.getElementById("leaderboardSection");
+    if (!section) return;
+
+    const students = users.filter(u => u.role === "student").sort((a, b) => b.points - a.points);
+    const maxPoints = students.length > 0 ? Math.max(...students.map(s => s.points), 1) : 1;
+
+    section.innerHTML = students.map((s, i) => {
+        const pct = (s.points / maxPoints) * 100;
+        return `
+            <div class="leader-row">
+                <div style="display:flex; justify-content:space-between; font-weight:600;">
+                    <span>${i + 1}. ${s.name}</span>
+                    <span>${s.points} Pts</span>
+                </div>
+                <div class="bar-container">
+                    <div class="bar-fill" style="width: ${pct}%"></div>
+                </div>
+            </div>
+        `;
+    }).join("");
+}
+
+function togglePassword() {
+    const p = document.getElementById("password");
+    const icon = document.getElementById("togglePass");
+    if (p.type === "password") {
+        p.type = "text";
+        icon.classList.replace("fa-eye", "fa-eye-slash");
+    } else {
+        p.type = "password";
+        icon.classList.replace("fa-eye-slash", "fa-eye");
+    }
+}
 if (!users) {
     users = [
         { name: "Eshan", password: "123", role: "student", points: 120, history: [{ action: "Account Created", date: "2026-03-15" }] },
