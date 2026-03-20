@@ -1,24 +1,50 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>BHOOMIFY Login</title>
-  <link rel="stylesheet" href="style.css">
+    <title>BHOOMIFY | Eco-Rewards</title>
+    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
+    <div class="homepage">
+        <header class="hero">
+            <h1>🌱 BHOOMIFY</h1>
+            <p>Gamifying Sustainability for a Greener Campus.</p>
+            <a href="#login-section" class="btn-main">Get Started</a>
+        </header>
 
-<div class="container">
-  <div class="header">🌱 BHOOMIFY</div>
+        <section class="info-section">
+            <h2>What is Bhoomify?</h2>
+            <p>Bhoomify is a platform where students earn points for eco-friendly actions like waste segregation, planting trees, and reducing plastic use.</p>
+            
+            <div class="how-to-grid">
+                <div class="step-card">
+                    <span>1</span>
+                    <h4>Perform Action</h4>
+                    <p>Segregate waste or plant a sapling.</p>
+                </div>
+                <div class="step-card">
+                    <span>2</span>
+                    <h4>Get Verified</h4>
+                    <p>Show your action to a faculty member.</p>
+                </div>
+                <div class="step-card">
+                    <span>3</span>
+                    <h4>Claim Points</h4>
+                    <p>Faculty adds points to your Bhoomify ID.</p>
+                </div>
+            </div>
+        </section>
 
-  <div class="card">
-    <h3>Login</h3>
-
-    <input type="text" id="username" placeholder="Username"><br>
-    <input type="password" id="password" placeholder="Password"><br>
-
-    <button onclick="login()">Login</button>
-  </div>
-</div>
-
-<script src="app.js"></script>
+        <section id="login-section" class="login-card-container">
+            <div class="card">
+                <h3>Login to Dashboard</h3>
+                <input type="text" id="username" placeholder="Username">
+                <input type="password" id="password" placeholder="Password">
+                <button onclick="login()">Login</button>
+            </div>
+        </section>
+    </div>
+    <script src="app.js"></script>
 </body>
 </html>
