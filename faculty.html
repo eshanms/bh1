@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Faculty Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<script>
+if (localStorage.getItem("role") !== "faculty") {
+  window.location.href = "login.html";
+}
+</script>
+
+<div class="container">
+
+<div class="header">Faculty Dashboard</div>
+
+<div class="card">
+  <h3>Assign Points</h3>
+
+  <input type="text" id="studentName" placeholder="Student Name"><br>
+  <input type="number" id="pointsInput" placeholder="Points"><br>
+
+  <button onclick="assignPoints()">Assign</button>
+</div>
+
+<button onclick="logout()">Logout</button>
+
+</div>
+
+<script src="app.js"></script>
+
+</body>
+</html>

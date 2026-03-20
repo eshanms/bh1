@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Student Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<script>
+if (localStorage.getItem("role") !== "student") {
+  window.location.href = "login.html";
+}
+</script>
+
+<div class="container">
+
+<div class="header">Student Dashboard</div>
+
+<div class="card">
+  <h3>Welcome, <span id="userName"></span></h3>
+  <h2>Points: <span id="points"></span></h2>
+</div>
+
+<div class="card">
+  <h3>🏆 Leaderboard</h3>
+  <ul id="leaderboard"></ul>
+</div>
+
+<div class="card">
+  <h3>🎁 Rewards</h3>
+  <div id="rewards"></div>
+</div>
+
+<div class="card">
+  <h3>📜 History</h3>
+  <ul id="history"></ul>
+</div>
+
+<button onclick="logout()">Logout</button>
+
+</div>
+
+<script src="app.js"></script>
+<script>
+initStudent();
+</script>
+
+</body>
+</html>
