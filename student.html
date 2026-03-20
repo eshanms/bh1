@@ -3,44 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BHOOMIFY | Student</title>
+    <title>BHOOMIFY | Dashboard</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body onload="initStudent()">
-    <div class="app-container">
-        <div class="navbar">
-            <div class="logo">🌱 BHOOMIFY</div>
-            <button class="btn-main" onclick="logout()" style="width: auto; padding: 10px 20px; background: #f1f5f9; color: var(--dark);">Logout</button>
-        </div>
+    <nav class="nav-container">
+        <img src="logo.png" alt="BHOOMIFY" class="site-logo"> 
+        <button class="btn-black" onclick="logout()" style="width: auto; padding: 10px 20px;">Logout</button>
+    </nav>
 
-        <div class="user-card">
-            <p style="text-transform: uppercase; letter-spacing: 2px; font-weight: 700; color: var(--text-muted); font-size: 0.8rem;">Current Balance</p>
-            <div class="points-display" id="points">0</div>
-            <p><span id="userName">User</span> • <span id="userLevel">Seed</span></p>
-        </div>
+    <div class="editorial-grid">
+        <main>
+            <section class="panel">
+                <p style="text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.7rem; font-weight: 700;">Account Balance</p>
+                <div class="points-hero" id="points">0</div>
+                <h2 style="margin:0;">Hello, <span id="userName">Student</span>.</h2>
+                <p id="userLevel" style="color: var(--brand-green); font-weight: 600;">Seed Status</p>
+            </section>
 
-        <div class="grid-layout">
-            <div>
-                <div class="card">
-                    <h3>🎁 Claim Rewards</h3>
-                    <div id="rewardsSection" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;"></div>
-                </div>
-                
-                <div class="card">
-                    <h3>📜 History</h3>
-                    <div id="history"></div>
-                </div>
+            <section class="panel">
+                <h3 style="margin-bottom: 30px;">Curated Rewards</h3>
+                <div id="rewardsSection" class="reward-grid"></div>
+            </section>
+
+            <section class="panel">
+                <h3 style="margin-bottom: 30px;">Activity History</h3>
+                <div id="history"></div>
+            </section>
+        </main>
+
+        <aside>
+            <div class="panel">
+                <h3 style="margin-bottom: 20px;">Top Contributors</h3>
+                <div id="leaderboardSection"></div>
             </div>
-
-            <div>
-                <div class="card">
-                    <h3>🏆 Leaderboard</h3>
-                    <div id="leaderboardSection"></div>
-                </div>
-                <a href="BHOOMIFY.pdf" target="_blank" class="btn-main" style="text-decoration:none; background: #1e293b; text-align:center;">Project Report (PDF)</a>
-            </div>
-        </div>
+            
+            <a href="BHOOMIFY.pdf" target="_blank" class="btn-black" style="display: block; text-decoration: none; text-align: center;">Project Report</a>
+        </aside>
     </div>
+
     <script src="app.js"></script>
 </body>
 </html>
