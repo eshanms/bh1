@@ -1,91 +1,38 @@
 :root { --p-green: #2ecc71; --d-green: #27ae60; --bg: #f4f7f6; --text: #2c3e50; }
-body { margin: 0; font-family: sans-serif; background: var(--bg); color: var(--text); }
-.app-container, .container { max-width: 500px; margin: 0 auto; }
-.hero { background: linear-gradient(45deg, var(--d-green), var(--p-green)); color: white; padding: 50px 20px; text-align: center; }
-.navbar, .header { background: var(--d-green); color: white; padding: 15px; display: flex; justify-content: space-between; align-items: center; }
-.user-welcome { text-align: center; padding: 30px; background: white; border-radius: 0 0 30px 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-.points-badge { font-size: 3rem; font-weight: bold; color: var(--d-green); }
-.card { background: white; margin: 15px; padding: 20px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-input { width: 90%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 8px; }
-button { width: 100%; padding: 12px; background: var(--p-green); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; }
-.rewards-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-.reward-item { border: 1px solid #eee; padding: 10px; border-radius: 10px; text-align: center; }
-.progress-bg { background: #eee; height: 10px; border-radius: 5px; overflow: hidden; margin-top: 5px; }
-.progress-fill { background: var(--p-green); height: 100%; transition: width 0.5s; }
-.leader-row { display: flex; align-items: center; gap: 10px; margin-bottom: 15px; }
-.history-item { display: flex; justify-content: space-between; font-size: 0.8rem; padding: 5px 0; border-bottom: 1px solid #eee; }
-.download-btn { display: block; background: #34495e; color: white; padding: 10px; text-decoration: none; border-radius: 5px; margin-top: 10px; }
-.step-card { background: #f9f9f9; padding: 10px; margin: 10px 0; border-left: 4px solid var(--d-green); }
-.btn-main { background: white; color: var(--d-green); padding: 10px 20px; text-decoration: none; border-radius: 20px; display: inline-block; margin-top: 15px; font-weight: bold; }
-  .admin-actions {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
+body { margin: 0; font-family: 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); }
+.app-container { max-width: 500px; margin: 0 auto; min-height: 100vh; background: #fff; }
 
-hr {
-    border: 0;
-    border-top: 1px solid #eee;
-    margin: 20px 0;
-}
+.navbar { background: var(--d-green); color: white; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; position: sticky; top:0; z-index:100; }
+.logo { font-weight: bold; font-size: 1.2rem; }
+.logout-btn { background: rgba(255,255,255,0.2); border: 1px solid white; padding: 5px 12px; border-radius: 5px; color: white; cursor: pointer; }
 
-select {
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 10px;
-    border-radius: 8px;
-    border: 1px solid #ddd;
-}
+.card { background: white; margin: 15px; padding: 20px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #eee; }
+.user-welcome { text-align: center; padding: 40px 20px; background: white; border-radius: 0 0 30px 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+.points-badge { font-size: 3.5rem; font-weight: bold; color: var(--d-green); line-height: 1; margin: 10px 0; }
 
+/* Admin Menu & Details */
+.admin-menu { padding: 10px; }
+.admin-card { background: #fff; margin-bottom: 12px; border-radius: 12px; border: 1px solid #eee; overflow: hidden; }
+.admin-card summary { padding: 18px; font-weight: bold; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; background: #fff; }
+.admin-card summary::after { content: '▾'; color: #ccc; }
+.admin-card[open] summary { border-bottom: 1px solid #f0f0f0; }
+.admin-card[open] summary::after { content: '▴'; }
+.admin-card .content { padding: 20px; background: #fafafa; }
 
+/* Elements */
+input, select { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ddd; border-radius: 10px; box-sizing: border-box; font-size: 1rem; }
+button { width: 100%; padding: 14px; background: var(--p-green); color: white; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; transition: 0.3s; }
+button:hover { background: var(--d-green); }
 
-/* Faculty Specific Styles */
-.admin-menu { padding: 15px; }
+/* Leaderboard */
+.leader-row { display: flex; align-items: center; gap: 12px; margin-bottom: 15px; }
+.rank-badge { width: 35px; height: 35px; background: #f0f0f0; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
+.name-row { display: flex; justify-content: space-between; font-weight: 600; font-size: 0.9rem; margin-bottom: 4px; }
+.progress-bg { background: #eee; height: 8px; border-radius: 10px; overflow: hidden; }
+.progress-fill { background: linear-gradient(90deg, var(--p-green), var(--d-green)); height: 100%; border-radius: 10px; transition: width 0.8s ease; }
 
-.admin-card {
-    background: white;
-    margin-bottom: 10px;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-}
-
-.admin-card summary {
-    padding: 18px;
-    font-weight: bold;
-    cursor: pointer;
-    background: #fff;
-    list-style: none;
-    display: flex;
-    justify-content: space-between;
-    transition: background 0.3s;
-    border-bottom: 1px solid #f0f0f0;
-}
-
-.admin-card summary:hover { background: #f9f9f9; }
-
-.admin-card .content {
-    padding: 20px;
-    background: #fafafa;
-}
-
-.list-container {
-    margin-top: 15px;
-    max-height: 250px;
-    overflow-y: auto;
-    border-top: 1px solid #ddd;
-}
-
-.input-group { display: flex; flex-direction: column; gap: 8px; }
-
-select {
-    width: 100%;
-    padding: 12px;
-    border-radius: 8px;
-    border: 1px solid #ddd;
-    margin-bottom: 10px;
-    background: white;
-}   
-
-
-    
+/* Grids & Lists */
+.rewards-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 15px; }
+.reward-item { background: white; border: 1px solid #eee; padding: 15px; border-radius: 15px; text-align: center; transition: 0.3s; }
+.history-item { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #f0f0f0; font-size: 0.85rem; }
+.list-container { max-height: 200px; overflow-y: auto; margin-top: 15px; }
