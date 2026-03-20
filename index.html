@@ -1,33 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8"><title>Bhoomify | Welcome</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bhoomify | Sustainable Campus</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body style="display: flex; height: 100vh; overflow: hidden;">
     <div style="flex: 1.2; background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('a.jpg') center/cover; color: white; padding: 60px; display: flex; flex-direction: column; justify-content: center;">
-        <h1 style="font-size: 3.5rem; margin-bottom: 1rem;">Bhoomify.</h1>
-        <p style="font-size: 1.2rem; line-height: 1.6; max-width: 500px; opacity: 0.9;">
-            We are a campus-wide sustainability initiative. By participating in eco-friendly activities, students earn **Green Credits** which can be redeemed for rewards, fostering a culture of environmental responsibility.
+        <h1 style="font-size: 4rem; margin-bottom: 1rem;">Bhoomify.</h1>
+        <p style="font-size: 1.3rem; line-height: 1.6; max-width: 550px; opacity: 0.9;">
+            Building a greener campus together. Track your environmental impact, earn <strong>Green Credits</strong> for sustainable actions, and redeem them for exclusive rewards.
         </p>
     </div>
 
     <div style="flex: 1; display: flex; align-items: center; justify-content: center; background: white;">
-        <div class="animate" style="width: 100%; max-width: 380px; padding: 40px;">
-            <center><img src="logo.png" style="height: 100px; margin-bottom: 30px;"></center>
-            <h2 style="text-align: center; margin-bottom: 30px;">Member Login</h2>
+        <div class="animate" style="width: 100%; max-width: 400px; padding: 40px;">
+            <center><img src="logo.png" style="height: 120px; margin-bottom: 30px;"></center>
+            <h2 style="text-align: center; margin-bottom: 30px; font-weight: 800;">Member Portal</h2>
             
-            <label>Username</label>
-            <input type="text" id="username" placeholder="Enter name">
+            <label style="font-weight: 600; font-size: 0.9rem;">Username</label>
+            <input type="text" id="username" placeholder="Enter your full name">
             
-            <label>Password</label>
+            <label style="font-weight: 600; font-size: 0.9rem;">Password</label>
             <div style="position: relative;">
                 <input type="password" id="password" placeholder="••••••••">
                 <i class="fas fa-eye" id="togglePass" style="position: absolute; right: 15px; top: 20px; cursor: pointer; color: #94a3b8;" onclick="togglePassword()"></i>
             </div>
             
-            <button class="btn-main" onclick="login()" style="margin-top: 20px;">Sign In</button>
+            <button class="btn-main" onclick="login()" style="margin-top: 25px;">Sign In to Dashboard</button>
         </div>
     </div>
     <script src="app.js"></script>
