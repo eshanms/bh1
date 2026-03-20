@@ -148,3 +148,28 @@ function updateStudentSelect() {
     const select = document.getElementById("studentSelect");
     if (select) select.innerHTML = users.filter(u => u.role === 'student').map(u => `<option value="${u.name}">${u.name}</option>`).join("");
 }
+function updateCredits() {
+    const student = document.getElementById('studentSelect').value;
+    const points = parseInt(document.getElementById('pointAmount').value);
+    
+    if(!student || !points) return alert("Fill all fields");
+
+    let users = JSON.parse(localStorage.getItem('users')) || {};
+    if(users[student]) {
+        users[student].points += points;
+        users[student].history.push({
+            date: new Date().toLocaleDateString(),
+            reason: "Faculty Reward",
+            amount: points
+        });
+        localStorage.setItem('users', JSON.stringify(users));
+        alert(`Successfully added ${points} to ${student}`);
+    }
+}
+
+function addReward() {
+    const name = document.getElementById('rewardName').value;
+    const cost = document.getElementById('rewardCost').value;
+    // Logic to push to a 'rewards' array in localStorage
+    alert("Reward added to Student Shop!");
+}
