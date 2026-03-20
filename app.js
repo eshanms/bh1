@@ -1,4 +1,68 @@
 // --- 1. DATA INITIALIZATION (Persistence Optimized) ---
+
+// --- 2. FACULTY PORTAL FUNCTIONS (New Features) ---
+function initFaculty() {
+    if (localStorage.getItem("role") !== "faculty") { window.location.href = "index.html"; return; }
+    
+    document.getElementById("adminName").innerText = currentAdmin.name;
+    
+    updateStudentSelect();
+    renderRewardsAdmin();
+    renderLeaderboard();
+    renderLoginLog();
+    renderRedeemLog(); // NEW FUNCTION
+}
+
+// (New Feature) Deleting a student permanently
+function removeStudent() {
+    const studentSelect = document.getElementById("studentSelect").value;
+    const manualName = document.getElementById("manualName").value.trim();
+    const finalName = manualName || studentSelect;
+
+    if (!finalName) {
+        alert("Please select a student or enter a name.");
+        return;
+    }
+
+    // Confirm deletion
+    const confirmed = confirm(`Are you sure you want to PERMANENTLY delete ${finalName}? This cannot be undone.`);
+    if (!confirmed) return;
+
+    // Find and remove the student
+    const originalLength = users.length;
+    users = users.filter(u => u.name.toLowerCase() !== finalName.toLowerCase() || u.role !== 'student');
+
+    if (users.length === originalLength) {
+        alert(`Student "${finalName}" not found or is a faculty member.`);
+    } else {
+        alert(`Successfully deleted ${finalName}.`);
+        
+        // Log the deletion event
+        redeemLogs.unshift({ user: currentAdmin.name, item: `DELETED STUDENT: ${finalName}`, time: new Date().toLocaleString() });
+        saveAll();
+        
+        // Refresh UI components
+        updateStudentSelect();
+        renderLeaderboard();
+        renderRedeemLog();
+        document.getElementById("manualName").value = ""; // Clear manual input
+    }
+}
+
+// --- STUDENT ACTIONS ---
+function redeem(name, cost) {
+    const userName = localStorage.getItem("user");
+    const user = users.find(u => u.name === userName);
+    if (user && user.points >= cost) {
+        user.points -= cost;
+        user.history.unshift({ action: `Redeemed ${name}`, date: new Date().toLocaleDateString() });
+        redeemLogs.unshift({ user: user.name, item: name, time: new Date().toLocaleString() });
+        saveAll();
+        location.reload();
+    }
+}
+
+// Rest of the shared functions (login, renderLeaderboard, etc.) stay the same...
 let users = JSON.parse(localStorage.getItem("users"));
 // --- NEW: ADD STUDENT FUNCTION (FACULTY ONLY) ---
 function addStudent() {
