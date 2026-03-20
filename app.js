@@ -1,87 +1,91 @@
-// 1. DATA INITIALIZATION
+// --- 1. SETUP DATA (Include initial history for demo) ---
 let users = JSON.parse(localStorage.getItem("users")) || [
-  { name: "Eshan", password: "123", role: "student", points: 120, history: [] },
-  { name: "Aneya", password: "123", role: "student", points: 90, history: [] },
+  { name: "Eshan", password: "123", role: "student", points: 120, history: ["Joined Bhoomify"] },
+  { name: "Aneya", password: "123", role: "student", points: 180, history: ["Waste Segregation +50"] },
   { name: "Faculty1", password: "admin", role: "faculty" }
 ];
 
-// 2. SAVE/LOAD
-function saveUsers() {
-  localStorage.setItem("users", JSON.stringify(users));
-}
+const rewardsList = [
+  { id: 1, name: "Eco Badge", cost: 50, icon: "🏅" },
+  { id: 2, name: "Tree Sapling", cost: 150, icon: "🌱" },
+  { id: 3, name: "Cafeteria Coupon", cost: 100, icon: "☕" }
+];
 
-function loadUsers() {
-  const data = localStorage.getItem("users");
-  if (data) users = JSON.parse(data);
-}
+function saveUsers() { localStorage.setItem("users", JSON.stringify(users)); }
 
-// 3. LOGIN SYSTEM
-function login() {
-  loadUsers();
-  const nameInput = document.getElementById("username").value;
-  const passInput = document.getElementById("password").value;
-
-  const user = users.find(u => u.name === nameInput && u.password === passInput);
-
-  if (user) {
-    localStorage.setItem("user", user.name);
-    localStorage.setItem("role", user.role);
-    window.location.href = (user.role === "student") ? "student.html" : "faculty.html";
-  } else {
-    alert("Invalid Username or Password!");
-  }
-}
-
-// 4. LOGOUT
-function logout() {
-  localStorage.clear();
-  window.location.href = "login.html";
-}
-
-// 5. STUDENT DASHBOARD
 function initStudent() {
-  loadUsers();
   const name = localStorage.getItem("user");
   const user = users.find(u => u.name === name);
-
-  if (!user) return;
+  if (!user) { window.location.href = "login.html"; return; }
 
   document.getElementById("userName").innerText = user.name;
   document.getElementById("points").innerText = user.points;
 
-  const list = document.getElementById("leaderboard");
-  if (list) {
-    list.innerHTML = "";
-    users.filter(u => u.role === "student")
-         .sort((a,b) => b.points - a.points)
-         .forEach(u => {
-           let li = document.createElement("li");
-           li.innerText = u.name + " - " + u.points;
-           list.appendChild(li);
-         });
-  }
+  renderLeaderboard();
+  renderRewards(user);
+  renderHistory(user);
 }
 
-// 6. FACULTY SYSTEM
-function assignPoints() {
-  loadUsers();
-  const targetName = document.getElementById("studentName").value;
-  const pts = parseInt(document.getElementById("pointsInput").value);
+// --- NEW: GRAPH LEADERBOARD ---
+function renderLeaderboard() {
+  const students = users.filter(u => u.role === "student");
+  const names = students.map(s => s.name);
+  const points = students.map(s => s.points);
 
-  const student = users.find(u => u.name === targetName && u.role === "student");
+  const ctx = document.getElementById('leaderboardChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: names,
+      datasets: [{
+        label: 'Points Scored',
+        data: points,
+        backgroundColor: '#2ecc71',
+        borderRadius: 5
+      }]
+    },
+    options: { scales: { y: { beginAtZero: true } } }
+  });
+}
 
-  if (student && !isNaN(pts)) {
-    student.points += pts;
-    student.history.push("Earned " + pts + " points");
+function renderRewards(user) {
+  const container = document.getElementById("rewardsSection");
+  container.innerHTML = "";
+  rewardsList.forEach(reward => {
+    const item = document.createElement("div");
+    item.className = "reward-item";
+    item.innerHTML = `
+      <div>${reward.icon}</div>
+      <strong>${reward.name}</strong>
+      <p>${reward.cost} Pts</p>
+      <button onclick="redeem('${reward.name}', ${reward.cost})">Claim</button>
+    `;
+    container.appendChild(item);
+  });
+}
+
+function redeem(rewardName, cost) {
+  const name = localStorage.getItem("user");
+  const user = users.find(u => u.name === name);
+  
+  if (user.points >= cost) {
+    user.points -= cost;
+    user.history.unshift(`Redeemed ${rewardName} (-${cost})`);
     saveUsers();
-    alert("Points assigned!");
+    alert("Reward Claimed!");
     location.reload();
   } else {
-    alert("Check student name or points value!");
+    alert("Not enough points!");
   }
 }
 
-  
+function renderHistory(user) {
+  const list = document.getElementById("history");
+  list.innerHTML = user.history.map(h => `<li>${h}</li>`).join("");
+}
 
-
-  
+function logout() {
+  localStorage.removeItem("user");
+  localStorage.removeItem("role");
+  window.location.href = "login.html";
+}
