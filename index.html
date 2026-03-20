@@ -3,66 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BHOOMIFY | Eco-Rewards</title>
+    <title>BHOOMIFY | Welcome</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="homepage">
-        <header class="hero">
-            <div class="hero-content">
-                <div class="badge">🌱 Sustainability Reimagined</div>
-                <h1>BHOOMIFY</h1>
-                <p>Empowering students to build a greener campus through gamified eco-credits and real-world rewards.</p>
-                <div class="hero-btns">
-                    <a href="#login-section" class="btn-primary">Get Started</a>
-                    <a href="#how-it-works" class="btn-secondary">Learn More</a>
-                </div>
+        <div class="hero-side">
+            <div class="brand">🌱 BHOOMIFY</div>
+            <div style="margin-top: auto;">
+                <h1>Build a<br>Greener Future.</h1>
+                <p>Track your environmental impact, earn campus green credits, and trade them for exclusive rewards.</p>
             </div>
-        </header>
-
-        <section id="how-it-works" class="info-section">
-            <h2 class="section-title">Small Actions, Big Impact</h2>
-            <div class="how-to-grid">
-                <div class="step-card">
-                    <div class="step-num">01</div>
-                    <h4>Perform Action</h4>
-                    <p>Plant a tree, recycle waste, or use sustainable transport on campus.</p>
-                </div>
-                <div class="step-card">
-                    <div class="step-num">02</div>
-                    <h4>Verify Activity</h4>
-                    <p>Show your contribution to a faculty member to get your credits approved.</p>
-                </div>
-                <div class="step-card">
-                    <div class="step-num">03</div>
-                    <h4>Claim Rewards</h4>
-                    <p>Exchange your green credits for cafe coupons, badges, or saplings.</p>
-                </div>
+            <div style="margin-top: auto; font-size: 0.9rem; opacity: 0.7;">
+                &copy; 2026 Bhoomify Sustainability Initiative
             </div>
-        </section>
+        </div>
 
-        <section id="login-section" class="login-container">
-            <div class="login-card">
-                <h3>Member Login</h3>
-                <p>Enter your credentials to access your eco-dashboard.</p>
-                <div class="input-field">
-                    <input type="text" id="username" placeholder="Username" required>
+        <div class="login-side">
+            <div class="login-box">
+                <h2>Welcome Back</h2>
+                <p>Enter your details to access your dashboard.</p>
+                
+                <div class="input-group">
+                    <label>Username</label>
+                    <input type="text" id="username" placeholder="Enter your name">
                 </div>
-                <div class="input-field">
-                    <input type="password" id="password" placeholder="Password" required>
+
+                <div class="input-group">
+                    <label>Password</label>
+                    <input type="password" id="password" placeholder="••••••••">
                 </div>
-                <button class="login-submit" onclick="login()">Sign In</button>
-                <div class="login-footer">
-                    Faculty? Use your admin credentials.
-                </div>
+
+                <button class="btn-main" onclick="login()">Sign In</button>
+                
+                <p style="margin-top: 25px; font-size: 0.85rem; text-align: center;">
+                    New to campus? Contact faculty for an account.
+                </p>
             </div>
-        </section>
-
-        <footer class="footer">
-            <p>&copy; 2024 BHOOMIFY Project. Built for a Greener Tomorrow.</p>
-        </footer>
+        </div>
     </div>
+
     <script src="app.js"></script>
 </body>
 </html>
