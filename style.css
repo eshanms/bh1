@@ -1,4 +1,52 @@
+:root {
+    --p-green: #2ecc71;
+    --d-green: #27ae60;
+    --bg: #f4f7f6;
+    --text: #2c3e50;
+    --white: #ffffff;
+}
 
+body { margin: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bg); color: var(--text); }
+.app-container { max-width: 900px; margin: 0 auto; padding: 20px; }
+
+/* --- NAVIGATION --- */
+.navbar { background: var(--d-green); color: white; padding: 15px 25px; display: flex; justify-content: space-between; align-items: center; border-radius: 0 0 15px 15px; }
+.logout-btn { background: rgba(255,255,255,0.2); border: 1px solid white; padding: 6px 15px; border-radius: 8px; color: white; cursor: pointer; }
+
+/* --- CARDS --- */
+.card { background: var(--white); margin: 20px 0; padding: 25px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+.admin-card { border-left: 5px solid var(--p-green); }
+
+/* --- ATTRACTIVE LEADERBOARD --- */
+.leaderboard-container { display: flex; flex-direction: column; gap: 12px; }
+.leader-row { 
+    display: flex; align-items: center; 
+    padding: 15px; background: #fff; 
+    border-radius: 12px; border: 1px solid #eee;
+    transition: transform 0.2s;
+}
+.leader-row:hover { transform: scale(1.01); border-color: var(--p-green); }
+.rank-medal { width: 40px; font-size: 1.5rem; text-align: center; }
+.user-info { flex: 1; margin-left: 10px; }
+.name-pts { display: flex; justify-content: space-between; font-weight: 600; margin-bottom: 5px; }
+.progress-bg { background: #f0f0f0; height: 10px; border-radius: 10px; overflow: hidden; }
+.progress-fill { background: linear-gradient(90deg, var(--p-green), #3498db); height: 100%; border-radius: 10px; transition: width 0.5s ease; }
+
+/* --- FACULTY LOGS & TABLES --- */
+.log-table { width: 100%; border-collapse: collapse; margin-top: 15px; background: white; border-radius: 10px; overflow: hidden; }
+.log-table th { background: #f8f9fa; padding: 12px; text-align: left; font-size: 0.8rem; text-transform: uppercase; color: #777; }
+.log-table td { padding: 12px; border-bottom: 1px solid #eee; font-size: 0.9rem; }
+
+/* --- FORMS & BUTTONS --- */
+input, select { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; }
+button { width: 100%; padding: 14px; background: var(--p-green); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 1rem; }
+button:hover { background: var(--d-green); }
+.btn-tab { background: #ecf0f1; color: #7f8c8d; width: auto; padding: 8px 20px; margin-right: 5px; margin-bottom: 10px; }
+.btn-tab.active { background: var(--d-green); color: white; }
+
+/* --- REWARD EDITING --- */
+.reward-edit-item { display: flex; justify-content: space-between; align-items: center; padding: 10px; border-bottom: 1px solid #eee; }
+.del-btn { background: #e74c3c; width: auto; padding: 5px 10px; font-size: 0.8rem; }
  
   
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap');
